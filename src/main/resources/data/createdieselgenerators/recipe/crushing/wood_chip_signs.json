@@ -1,0 +1,15 @@
+{
+  "type": "create:crushing",
+  "ingredient": "#minecraft:signs",
+  "results": [
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "count": 8
+    },
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "chance": 0.5
+    }
+  ],
+  "processing_time": 0
+}

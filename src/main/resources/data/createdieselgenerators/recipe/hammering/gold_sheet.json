@@ -1,0 +1,9 @@
+{
+  "type": "createdieselgenerators:hammering",
+  "ingredient": "#c:ingots/gold",
+  "results": [
+    {
+      "id": "create:golden_sheet"
+    }
+  ]
+}

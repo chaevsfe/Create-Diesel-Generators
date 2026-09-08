@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AZF",
+    "SPS",
+    "AZA"
+  ],
+  "key": {
+    "A": "create:andesite_alloy",
+    "S": "#c:plates/iron",
+    "Z": "#c:ingots/zinc",
+    "P": "create:propeller",
+    "F": "create:fluid_pipe"
+  },
+  "result": {
+    "id": "createdieselgenerators:engine_turbocharger"
+  }
+}

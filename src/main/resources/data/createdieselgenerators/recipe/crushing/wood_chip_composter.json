@@ -1,0 +1,15 @@
+{
+  "type": "create:crushing",
+  "ingredient": "minecraft:composter",
+  "results": [
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "count": 27
+    },
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "chance": 0.5
+    }
+  ],
+  "processing_time": 0
+}

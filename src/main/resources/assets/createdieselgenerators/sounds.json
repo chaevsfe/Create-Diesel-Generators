@@ -1,0 +1,12 @@
+{
+  "engine_normal": {
+    "subtitle": "sounds.createdieselgenerators.engine_normal",
+    "sounds": [
+      {
+        "name": "createdieselgenerators:engine_normal",
+        "type": "file",
+        "attenuation_distance": 16
+      }
+    ]
+  }
+}

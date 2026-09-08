@@ -1,0 +1,24 @@
+{
+  "type": "createdieselgenerators:casting",
+  "mold": "createdieselgenerators:bar",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "immersiveengineering"
+      ]
+    }
+  ],
+  "fluid_ingredients": [
+    {
+      "type": "fluid_tag",
+      "fluid_tag": "#c:phenolic_resin",
+      "amount": 20250
+    }
+  ],
+  "results": [
+    {
+      "id": "immersiveengineering:plate_duroplast"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "createdieselgenerators:compression_molding",
+  "mold": "createdieselgenerators:lines",
+  "ingredients": [
+    "#c:plates/iron"
+  ],
+  "results": [
+    {
+      "id": "createdieselgenerators:sheet_metal_panel",
+      "count": 4
+    }
+  ]
+}

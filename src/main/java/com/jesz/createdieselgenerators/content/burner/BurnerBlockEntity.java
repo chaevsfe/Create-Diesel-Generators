@@ -1,0 +1,196 @@
+package com.jesz.createdieselgenerators.content.burner;
+
+import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
+import com.jesz.createdieselgenerators.CDGRegistries;
+import com.jesz.createdieselgenerators.fuel_type.FuelType;
+import com.zurrtum.create.content.kinetics.base.KineticBlockEntity;
+import com.zurrtum.create.content.processing.burner.BlazeBurnerBlock;
+import com.jesz.createdieselgenerators.content.fluids.CDGFluidTank;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import com.zurrtum.create.infrastructure.fluids.FluidInventory;
+
+import java.util.List;
+import com.jesz.createdieselgenerators.foundation.CDGInv;
+import com.zurrtum.create.client.api.goggles.IHaveGoggleInformation;
+import com.jesz.createdieselgenerators.CDGFluids;
+
+public class BurnerBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
+    public float heat = -1;
+    public int redstoneOutput = 0;
+    CDGFluidTank tank = new CDGFluidTank(CDGFluids.mb(100), f -> {});
+
+    public float valveState = 0.2f;
+    public float prevValveState;
+    int tick;
+    float multiplier;
+    boolean ignited = false;
+    int ignitionTries;
+    public int redstonePower = 0;
+
+    @Override
+    public void tick() {
+        tick = (tick + 1) & 0xFFFF;
+        super.tick();
+
+        if (level != null && level.isClientSide())
+            tickAudio();
+
+        prevValveState = valveState;
+        valveState = Mth.clamp(valveState + getSpeed() / 5000, 0, 1);
+        float valveOrRedstoneState = Math.max(this.valveState, redstonePower * 4);
+
+        boolean containsValidFuel = !tank.getFluid().isEmpty();
+        if (containsValidFuel)
+            multiplier = FuelType.getTypeFor(level.registryAccess().lookupOrThrow(CDGRegistries.FUEL_TYPE), tank.getFluid().getFluid()).burnerStrength();
+        if (multiplier == 0)
+            containsValidFuel = false;
+
+        if (valveState == 0 || !containsValidFuel) {
+            heat = -1;
+            if (!level.isClientSide()) {
+                if (ignited)
+                    level.playSound(null, worldPosition, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.3f, level.getRandom().nextFloat() * 0.4F + 0.7F);
+
+                ignited = false;
+                ignitionTries = 0;
+            }
+        }
+        if (containsValidFuel && valveOrRedstoneState != 0) {
+            heat = (valveOrRedstoneState + 1) * multiplier;
+            if (level.isClientSide())
+                return;
+            if (tick % 5 == 0) {
+                if(!ignited){
+                    level.playSound(null, worldPosition, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.5f, level.getRandom().nextFloat() * 0.4F + 0.7F);
+                    ignitionTries++;
+                    if(ignitionTries > 4)
+                        ignited = true;
+                }
+            }
+            if ((int)(tick % (10 / valveOrRedstoneState)) == 0) {
+                CDGInv.drain(tank, CDGFluids.MB, false);
+                sendData();
+                setChanged();
+            }
+        }
+        if (level.isClientSide())
+            return;
+        if (getBlockState().getValue(BurnerBlock.HEAT_LEVEL) != calculateHeatLevel(heat)) {
+            level.setBlockAndUpdate(worldPosition, getBlockState().setValue(BurnerBlock.HEAT_LEVEL, calculateHeatLevel(heat)).setValue(BurnerBlock.LIT, heat > 0));
+            notifyUpdate();
+        }
+
+        int newRedstoneOutput = (int) Mth.clamp(heat * 6, 0, 15);
+        if (redstoneOutput != newRedstoneOutput) {
+            redstoneOutput = newRedstoneOutput;
+            setChanged();
+        }
+    }
+
+    private void tickAudio() {
+        float valveOrRedstoneState = Math.min(3, redstonePower != 0 ? 10 : this.valveState);
+        if (valveOrRedstoneState == 0 || heat == -1)
+            return;
+        if (tick % 20 == 0)
+            level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), SoundEvents.FIRE_AMBIENT, SoundSource.BLOCKS, heat * 0.3f, 1f, true);
+
+        switch (tick & 15) {
+            case 5, 6, 9, 10:
+                return;
+            default:
+                break;
+        }
+
+        addParticle(ParticleTypes.SMOKE, valveOrRedstoneState, 0.75);
+        if (redstonePower != 0 && heat >= 1.8f) {
+            if (chance(1)) {
+                addParticle(ParticleTypes.LARGE_SMOKE, valveOrRedstoneState, 0.75);
+            }
+
+            if (chance(1)) {
+                addParticle(ParticleTypes.FLAME, valveOrRedstoneState, 0.75);
+                addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, valveState, 1.75);
+            }
+        }
+
+        if (heat >= 1.8f && chance((int) (1 + heat * 2))) {
+            addParticle(ParticleTypes.SOUL_FIRE_FLAME, valveOrRedstoneState, 0.75);
+        } else {
+            addParticle(ParticleTypes.FLAME, valveOrRedstoneState, 0.75);
+        }
+    }
+
+    private void addParticle(ParticleOptions particle, float velocity, double yOffset){
+        level.addParticle(
+                particle,
+                worldPosition.getX() + 0.3475 + (tick & 3) / 9d,
+                worldPosition.getY() + yOffset,
+                worldPosition.getZ() + 0.3475 + (tick & 12) / 36d,
+                0,
+                0.02 * velocity,
+                0
+        );
+    }
+
+    private boolean chance(int bound){
+        return level.getRandom().nextInt(bound) != 1;
+    }
+
+    public BlazeBurnerBlock.HeatLevel calculateHeatLevel(float heat) {
+        if(heat >= 1.8f)
+            return BlazeBurnerBlock.HeatLevel.SEETHING;
+        if(heat >= 1.4f)
+            return BlazeBurnerBlock.HeatLevel.KINDLED;
+        if(heat >= 1.2f)
+            return BlazeBurnerBlock.HeatLevel.FADING;
+        if(heat >= 1f)
+            return BlazeBurnerBlock.HeatLevel.SMOULDERING;
+        return BlazeBurnerBlock.HeatLevel.NONE;
+    }
+
+    @Override
+    protected void write(ValueOutput tag, boolean clientPacket) {
+        tag.putFloat("ValveState", valveState);
+        tag.putFloat("Heat", heat);
+        tag.putInt("Tick", tick);
+        tank.write(tag.child("FluidContent"));
+        tag.putInt("RedstonePower", redstonePower);
+        tag.putByte("RedstoneOutput", (byte) redstoneOutput);
+        super.write(tag, clientPacket);
+    }
+
+    @Override
+    protected void read(ValueInput tag, boolean clientPacket) {
+        valveState = tag.getFloatOr("ValveState", 0f);
+        heat = tag.getFloatOr("Heat", 0f);
+        tick = tag.getIntOr("Tick", 0);
+        tank.read(tag.childOrEmpty("FluidContent"));
+        redstonePower = tag.getIntOr("RedstonePower", 0);
+        if (tag.getBooleanOr("RedstonePower", false))
+            redstonePower = 15;
+        redstoneOutput = tag.getByteOr("RedstoneOutput", (byte) 0);
+        super.read(tag, clientPacket);
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        return containedFluidTooltip(tooltip, isPlayerSneaking, tank);
+    }
+
+    public BurnerBlockEntity(BlockEntityType<?> typeIn, BlockPos pos, BlockState state) {
+        super(typeIn, pos, state);
+    }
+}

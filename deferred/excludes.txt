@@ -1,0 +1,5 @@
+# Source paths excluded from the main source set until the render/GUI/ponder phases.
+# Recorded in deferred/README.md.
+# CC:Tweaked compat - the dan200 API is not on the build classpath yet (scope doc: keep if it resolves, else defer)
+**/compat/computercraft/*.java
+**/compat/computercraft/peripherals/*.java

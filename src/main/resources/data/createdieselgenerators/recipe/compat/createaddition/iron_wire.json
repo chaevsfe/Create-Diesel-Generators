@@ -1,0 +1,17 @@
+{
+  "type": "createdieselgenerators:wire_cutting",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "createaddition"
+      ]
+    }
+  ],
+  "ingredient": "#c:plates/iron",
+  "results": [
+    {
+      "id": "createaddition:iron_wire"
+    }
+  ]
+}

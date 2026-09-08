@@ -1,0 +1,7 @@
+// client item renderer registration - P8
+
+    @Environment(EnvType.CLIENT)
+    public void registerExtension(RegisterClientExtensionsEvent event) {
+        event.registerItem(SimpleCustomRenderer.create(this, new MoldItemRenderer()), this);
+    }
+

@@ -1,0 +1,42 @@
+// from content/pumpjack/PumpjackHoleBlockEntity.java
+    @Environment(EnvType.CLIENT)
+    protected AbstractTickableSoundInstance soundInstance;
+
+    @Environment(EnvType.CLIENT)
+    public static class PumpjackSoundInstance extends AbstractTickableSoundInstance {
+        public PumpjackSoundInstance(SoundEvent event, float volume, float pitch, Vec3 pos) {
+            super(event, SoundSource.BLOCKS, RandomSource.create());
+            this.x = pos.x;
+            this.y = pos.y;
+            this.z = pos.z;
+            this.volume = volume;
+            this.pitch = pitch;
+            this.looping = true;
+            this.delay = 0;
+            this.attenuation = Attenuation.LINEAR;
+        }
+
+        @Override
+        public void tick() {}
+    }
+
+    @Environment(EnvType.CLIENT)
+    protected void tickClient() {
+        boolean isActive = started && valid && oilAmount > 0;
+
+        if (isActive) {
+            if (soundInstance == null || soundInstance.isStopped()) {
+                soundInstance = new PumpjackSoundInstance(
+                        SoundEvents.BUBBLE_COLUMN_WHIRLPOOL_AMBIENT, 0.2f, 0.4f,
+                        Vec3.atCenterOf(getBlockPos()));
+                Minecraft.getInstance().getSoundManager().play(soundInstance);
+            }
+        } else {
+            if (soundInstance != null) {
+                Minecraft.getInstance().getSoundManager().stop(soundInstance);
+                soundInstance = null;
+            }
+        }
+    }
+
+

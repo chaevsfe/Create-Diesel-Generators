@@ -1,0 +1,20 @@
+{
+  "type": "create:crushing",
+  "ingredient": "#minecraft:hanging_signs",
+  "results": [
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "count": 31
+    },
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "chance": 0.5
+    },
+    {
+      "id": "minecraft:iron_nugget",
+      "count": 2,
+      "chance": 0.5
+    }
+  ],
+  "processing_time": 0
+}

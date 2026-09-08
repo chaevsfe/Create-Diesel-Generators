@@ -1,0 +1,18 @@
+{
+  "type": "createdieselgenerators:wire_cutting",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "electroenergetics"
+      ]
+    }
+  ],
+  "ingredient": "#c:plates/copper",
+  "results": [
+    {
+      "id": "electroenergetics:copper_wire",
+      "count": 3
+    }
+  ]
+}

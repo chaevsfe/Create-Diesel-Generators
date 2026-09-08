@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AZA",
+    "ZBZ",
+    "AZA"
+  ],
+  "key": {
+    "A": "create:andesite_alloy",
+    "Z": "#c:ingots/zinc",
+    "B": "create:mechanical_bearing"
+  },
+  "result": {
+    "id": "createdieselgenerators:pumpjack_bearing"
+  }
+}

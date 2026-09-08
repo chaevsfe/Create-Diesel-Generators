@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "LLL",
+    " A "
+  ],
+  "key": {
+    "L": "minecraft:leather",
+    "S": "minecraft:string",
+    "A": "create:andesite_alloy"
+  },
+  "result": {
+    "id": "createdieselgenerators:track_layers_bag"
+  }
+}

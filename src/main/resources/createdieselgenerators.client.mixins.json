@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "priority": 1177,
+  "package": "com.jesz.createdieselgenerators.client.mixins",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "BasinRenderStateMixin",
+    "BasinRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

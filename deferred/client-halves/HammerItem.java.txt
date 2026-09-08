@@ -1,0 +1,7 @@
+// from content/tools/hammer/HammerItem.java
+    @Environment(EnvType.CLIENT)
+    public void registerExtension(RegisterClientExtensionsEvent event) {
+        event.registerItem(SimpleCustomRenderer.create(this, new HammerItemRenderer()), this);
+    }
+
+

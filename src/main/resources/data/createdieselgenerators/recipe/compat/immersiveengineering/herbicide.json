@@ -1,0 +1,29 @@
+{
+  "type": "createdieselgenerators:bulk_fermenting",
+  "processingTime": 400,
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "immersiveengineering"
+      ]
+    }
+  ],
+  "ingredients": [
+    "#c:dusts/sulfur",
+    "#c:dusts/copper"
+  ],
+  "fluid_ingredients": [
+    {
+      "type": "fluid_tag",
+      "fluid_tag": "#c:ethanol",
+      "amount": 40500
+    }
+  ],
+  "fluid_results": [
+    {
+      "id": "immersiveengineering:herbicide",
+      "amount": 40500
+    }
+  ]
+}

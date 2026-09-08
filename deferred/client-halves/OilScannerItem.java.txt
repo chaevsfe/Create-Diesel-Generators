@@ -1,0 +1,40 @@
+// model overrides / item model datagen - P8
+    public void registerModelOverrides() {
+        CatnipServices.PLATFORM.executeOnClientOnly(() -> () -> {
+            ItemProperties.register(CDGItems.OIL_SCANNER.get(), CreateDieselGenerators.rl("oil_scanner_state"),
+                    (stack, level, entity, seed) -> stack.getOrDefault(CDGDataComponents.OIL_SCANNER_STATE, 0));
+        });
+    }
+
+    public static ItemModelBuilder addOverrideModels(DataGenContext<Item, OilScannerItem> c,
+                                                     RegistrateItemModelProvider p) {
+        ItemModelBuilder builder = p.generated(c::getEntry, p.modLoc("item/oil_scanner_rotating"));
+
+        builder.override()
+                .predicate(CreateDieselGenerators.rl("oil_scanner_state"), 0.0f)
+                .model(p.getBuilder(c.getName())
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", CreateDieselGenerators.rl("item/oil_scanner_rotating")))
+                .end();
+        builder.override()
+                .predicate(CreateDieselGenerators.rl("oil_scanner_state"), 1.0f)
+                .model(p.getBuilder(c.getName() + "_none")
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", CreateDieselGenerators.rl("item/oil_scanner_none")))
+                .end();
+        builder.override()
+                .predicate(CreateDieselGenerators.rl("oil_scanner_state"), 2.0f)
+                .model(p.getBuilder(c.getName() + "_medium")
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", CreateDieselGenerators.rl("item/oil_scanner_medium")))
+                .end();
+        builder.override()
+                .predicate(CreateDieselGenerators.rl("oil_scanner_state"), 3.0f)
+                .model(p.getBuilder(c.getName() + "_high")
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", CreateDieselGenerators.rl("item/oil_scanner_high")))
+                .end();
+        return builder;
+    }
+
+

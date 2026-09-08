@@ -1,0 +1,26 @@
+{
+  "type": "createdieselgenerators:bulk_fermenting",
+  "processing_time": 400,
+  "ingredients": [
+    "#create:pulpifiable",
+    "#create:pulpifiable",
+    "#create:pulpifiable",
+    "#create:pulpifiable"
+  ],
+  "fluid_ingredients": [
+    {
+      "type": "fluid_stack",
+      "fluid": "minecraft:water",
+      "amount": 20250
+    }
+  ],
+  "results": [
+    {
+      "id": "create:pulp"
+    },
+    {
+      "id": "create:pulp",
+      "chance": 0.5
+    }
+  ]
+}

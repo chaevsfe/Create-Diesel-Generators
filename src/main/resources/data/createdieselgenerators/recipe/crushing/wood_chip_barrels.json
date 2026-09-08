@@ -1,0 +1,15 @@
+{
+  "type": "create:crushing",
+  "ingredient": "#c:barrels/wooden",
+  "results": [
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "count": 55
+    },
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "chance": 0.5
+    }
+  ],
+  "processing_time": 0
+}

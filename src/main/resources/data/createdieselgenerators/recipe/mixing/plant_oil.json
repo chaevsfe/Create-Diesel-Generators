@@ -1,0 +1,12 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    "#c:seeds"
+  ],
+  "fluid_results": [
+    {
+      "id": "createdieselgenerators:plant_oil",
+      "amount": 8100
+    }
+  ]
+}

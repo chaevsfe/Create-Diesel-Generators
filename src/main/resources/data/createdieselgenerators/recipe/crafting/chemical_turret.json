@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PBS",
+    " G ",
+    "BCB"
+  ],
+  "key": {
+    "G": "create:cogwheel",
+    "S": "createdieselgenerators:chemical_sprayer",
+    "B": "#c:plates/copper",
+    "C": "create:copper_casing",
+    "P": "create:precision_mechanism"
+  },
+  "result": {
+    "id": "createdieselgenerators:chemical_turret"
+  }
+}

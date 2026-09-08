@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "results": [
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "count": 31
+    },
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "chance": 0.5
+    }
+  ],
+  "ingredient": {
+    "fabric:type": "fabric:difference",
+    "base": "#minecraft:logs",
+    "subtracted": "createdieselgenerators:chip_wood_beam"
+  },
+  "processing_time": 0
+}

@@ -1,0 +1,16 @@
+{
+  "type": "createdieselgenerators:compression_molding",
+  "mold": "createdieselgenerators:lines",
+  "ingredients": [
+    "createdieselgenerators:wood_chip",
+    "createdieselgenerators:wood_chip",
+    "createdieselgenerators:wood_chip",
+    "createdieselgenerators:wood_chip"
+  ],
+  "results": [
+    {
+      "id": "minecraft:stick",
+      "count": 4
+    }
+  ]
+}

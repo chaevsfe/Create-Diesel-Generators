@@ -1,0 +1,65 @@
+// from content/andesite_girder/AndesiteGirderWrenchBehaviour.java
+    @Environment(EnvType.CLIENT)
+    public static void tick() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.level == null || !(mc.hitResult instanceof BlockHitResult result))
+            return;
+
+        ClientLevel world = mc.level;
+        BlockPos pos = result.getBlockPos();
+        Player player = mc.player;
+        ItemStack heldItem = player.getMainHandItem();
+
+        if (player.isSteppingCarefully())
+            return;
+
+        if (!CDGBlocks.ANDESITE_GIRDER.has(world.getBlockState(pos)))
+            return;
+
+        if (!AllItems.WRENCH.isIn(heldItem))
+            return;
+
+        Pair<Direction, Action> dirPair = getDirectionAndAction(result, world, pos);
+        if (dirPair == null)
+            return;
+
+        Vec3 center = VecHelper.getCenterOf(pos);
+        Vec3 edge = center.add(Vec3.atLowerCornerOf(dirPair.getFirst()
+                        .getNormal())
+                .scale(0.4));
+        Direction.Axis[] axes = Arrays.stream(Iterate.axes)
+                .filter(axis -> axis != dirPair.getFirst()
+                        .getAxis())
+                .toArray(Direction.Axis[]::new);
+
+        double normalMultiplier = dirPair.getSecond() == Action.PAIR ? 4 : 1;
+        Vec3 corner1 = edge
+                .add(Vec3.atLowerCornerOf(Direction.fromAxisAndDirection(axes[0], Direction.AxisDirection.POSITIVE)
+                                .getNormal())
+                        .scale(0.3))
+                .add(Vec3.atLowerCornerOf(Direction.fromAxisAndDirection(axes[1], Direction.AxisDirection.POSITIVE)
+                                .getNormal())
+                        .scale(0.3))
+                .add(Vec3.atLowerCornerOf(dirPair.getFirst()
+                                .getNormal())
+                        .scale(0.1 * normalMultiplier));
+
+        normalMultiplier = dirPair.getSecond() == Action.HORIZONTAL ? 9 : 2;
+        Vec3 corner2 = edge
+                .add(Vec3.atLowerCornerOf(Direction.fromAxisAndDirection(axes[0], Direction.AxisDirection.NEGATIVE)
+                                .getNormal())
+                        .scale(0.3))
+                .add(Vec3.atLowerCornerOf(Direction.fromAxisAndDirection(axes[1], Direction.AxisDirection.NEGATIVE)
+                                .getNormal())
+                        .scale(0.3))
+                .add(Vec3.atLowerCornerOf(dirPair.getFirst()
+                                .getOpposite()
+                                .getNormal())
+                        .scale(0.1 * normalMultiplier));
+
+        Outliner.getInstance().showAABB("andesiteGirderWrench", new AABB(corner1, corner2))
+                .lineWidth(1 / 32f)
+                .colored(new Color(95, 95, 255));
+    }
+
+

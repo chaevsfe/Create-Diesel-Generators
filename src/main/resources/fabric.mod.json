@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "createdieselgenerators",
+  "version": "${version}",
+  "name": "Create Fly: Diesel Generators (Unofficial Port)",
+  "description": "Create: Diesel Generators port for Create Fly 26.2. Oil prospecting and extraction, distillation and fermentation, and a family of diesel engines that burn the fuels you refine.",
+  "authors": [
+    "George VI",
+    "chaevsfe"
+  ],
+  "contributors": [
+    "chaevsfe"
+  ],
+  "contact": {
+    "homepage": "https://github.com/chaevsfe/Create-Diesel-Generators",
+    "sources": "https://github.com/chaevsfe/Create-Diesel-Generators",
+    "issues": "https://github.com/chaevsfe/Create-Diesel-Generators/issues",
+    "upstream": "https://modrinth.com/mod/create-diesel-generators"
+  },
+  "license": [
+    "MIT"
+  ],
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.jesz.createdieselgenerators.CreateDieselGeneratorsFabric"
+    ],
+    "client": [
+      "com.jesz.createdieselgenerators.CreateDieselGeneratorsClient"
+    ],
+    "create_plugin": [
+      "com.jesz.createdieselgenerators.CreateDieselGeneratorsPlugin"
+    ]
+  },
+  "accessWidener": "createdieselgenerators.accesswidener",
+  "mixins": [
+    "createdieselgenerators.mixins.json",
+    {
+      "config": "createdieselgenerators.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "minecraft": "${minecraft_dependency_version}",
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": "*",
+    "create": "${create_fabric_version_range}",
+    "java": ">=25"
+  }
+}

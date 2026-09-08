@@ -1,0 +1,10 @@
+{
+  "type": "createdieselgenerators:wire_cutting",
+  "ingredient": "#minecraft:planks",
+  "results": [
+    {
+      "id": "minecraft:stick",
+      "count": 4
+    }
+  ]
+}

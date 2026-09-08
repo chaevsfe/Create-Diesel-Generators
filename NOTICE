@@ -1,0 +1,35 @@
+Create Fly: Diesel Generators (Unofficial Port)
+===============================================
+
+This is an unofficial Fabric port of Create: Diesel Generators to Minecraft 26.2,
+built against Create Fly. It is not produced, endorsed or supported by the
+authors of the original mod.
+
+Upstream project
+----------------
+Create: Diesel Generators
+Copyright (c) 2023 George VI
+https://github.com/george8188625/Create-Diesel-Generators
+https://modrinth.com/mod/create-diesel-generators
+Licensed under the MIT License. The full licence text ships as LICENSE in this
+repository and inside both the mod jar and the sources jar.
+
+Port
+----
+Ported by chaevsfe, 2026.
+https://github.com/chaevsfe/Create-Diesel-Generators
+The port is distributed under the same MIT License as the upstream project.
+
+Third-party code
+----------------
+None. This port bundles no third-party libraries and no code from any other
+port. The registration helper classes under
+com/jesz/createdieselgenerators/registrate are original work written for this
+workspace; their public API names deliberately mirror Registrate's so that
+upstream call sites port unchanged, but no Registrate code is included.
+
+Assets
+------
+All textures, models, sounds and data files are the upstream project's own work
+and ship under its MIT licence. Assets belonging to Create Fly are not bundled;
+the mod resolves them from Create Fly at runtime.

@@ -1,0 +1,23 @@
+{
+  "type": "create:crushing",
+  "ingredient": {
+    "fabric:type": "fabric:any",
+    "ingredients": [
+      "#create:casing",
+      "create:linear_chassis",
+      "create:secondary_linear_chassis",
+      "create:radial_chassis"
+    ]
+  },
+  "results": [
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "count": 31
+    },
+    {
+      "id": "createdieselgenerators:wood_chip",
+      "chance": 0.5
+    }
+  ],
+  "processing_time": 0
+}

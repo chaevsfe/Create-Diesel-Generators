@@ -1,0 +1,14 @@
+{
+  "type": "createdieselgenerators:bulk_fermenting",
+  "processing_time": 400,
+  "ingredients": [
+    "#createdieselgenerators:fermentable",
+    "minecraft:bone_meal"
+  ],
+  "fluid_results": [
+    {
+      "id": "createdieselgenerators:ethanol",
+      "amount": 32400
+    }
+  ]
+}

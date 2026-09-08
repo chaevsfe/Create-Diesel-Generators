@@ -1,0 +1,30 @@
+// from content/diesel_engine/modular/ModularDieselEngineBlockEntity.java
+    @Environment(EnvType.CLIENT)
+    protected EngineSoundInstance soundInstance;
+
+    @Environment(EnvType.CLIENT)
+    protected void tickClient() {
+        if (enabled() && getThrottle() > 0 && !isOverStressed()) {
+            Vec3 pos = Vec3.atCenterOf(getBlockPos());
+            if (getBlockState().getValue(FACING).getAxis() == Direction.Axis.X)
+                pos = pos.add((double) length / 2 - 0.5, 0, 0);
+            else
+                pos = pos.add(0, 0, (double) length / 2 - 0.5);
+            if (soundInstance == null || soundInstance.isStopped() || soundInstance.getX() != pos.x || soundInstance.getZ() != pos.z) {
+                Minecraft.getInstance()
+                        .getSoundManager()
+                        .play(soundInstance = upgrade.createSoundInstance(this, pos));
+            } else if (soundInstance.active()) {
+                soundInstance.keepAlive();
+                soundInstance.setPitch(upgrade.getPitchMultiplier(this) * getFuelSoundPitch() * getThrottle());
+                soundInstance.setVolume(upgrade.getVolume(this));
+            }
+        } else {
+            if (soundInstance != null) {
+                soundInstance.fadeOut();
+                soundInstance = null;
+            }
+        }
+    }
+
+

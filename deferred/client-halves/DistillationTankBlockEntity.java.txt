@@ -1,0 +1,41 @@
+// from content/distillation/DistillationTankBlockEntity.java
+    @Environment(EnvType.CLIENT)
+    protected DistillationSoundInstance soundInstance;
+
+    @Environment(EnvType.CLIENT)
+    protected void tickClient() {
+        boolean isProcessing = isController() && isBottom() && processingTime > -1;
+
+        if (isProcessing) {
+            if (soundInstance == null || soundInstance.isStopped()) {
+                soundInstance = new DistillationSoundInstance(
+                        Vec3.atCenterOf(getBlockPos().offset(width / 2, height / 2, width / 2)));
+                Minecraft.getInstance().getSoundManager().play(soundInstance);
+            }
+        } else {
+            if (soundInstance != null) {
+                Minecraft.getInstance().getSoundManager().stop(soundInstance);
+                soundInstance = null;
+            }
+        }
+    }
+
+    @Environment(EnvType.CLIENT)
+    public static class DistillationSoundInstance extends AbstractTickableSoundInstance {
+        public DistillationSoundInstance(Vec3 pos) {
+            super(SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT, SoundSource.BLOCKS, RandomSource.create());
+            this.x = pos.x;
+            this.y = pos.y;
+            this.z = pos.z;
+            this.volume = 0.5f;
+            this.pitch = 0.45f;
+            this.looping = true;
+            this.delay = 0;
+            this.attenuation = Attenuation.LINEAR;
+        }
+
+        @Override
+        public void tick() {}
+    }
+
+

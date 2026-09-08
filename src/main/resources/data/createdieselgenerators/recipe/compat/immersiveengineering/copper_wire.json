@@ -1,0 +1,17 @@
+{
+  "type": "createdieselgenerators:wire_cutting",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "immersiveengineering"
+      ]
+    }
+  ],
+  "ingredient": "#c:plates/copper",
+  "results": [
+    {
+      "id": "immersiveengineering:wire_copper"
+    }
+  ]
+}

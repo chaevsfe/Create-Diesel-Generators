@@ -1,0 +1,34 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "createdieselgenerators:oil_scanner_state",
+    "scale": 1,
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "createdieselgenerators:item/oil_scanner"
+    },
+    "entries": [
+      {
+        "threshold": 1,
+        "model": {
+          "type": "minecraft:model",
+          "model": "createdieselgenerators:item/oil_scanner_none"
+        }
+      },
+      {
+        "threshold": 2,
+        "model": {
+          "type": "minecraft:model",
+          "model": "createdieselgenerators:item/oil_scanner_medium"
+        }
+      },
+      {
+        "threshold": 3,
+        "model": {
+          "type": "minecraft:model",
+          "model": "createdieselgenerators:item/oil_scanner_high"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+// client audio - P8
+
+    @Override
+    public void tickAudio() {
+        super.tickAudio();
+        float valveOrRedstoneState = Math.min(3, redstonePower != 0 ? 10 : this.valveState);
+        if (valveOrRedstoneState == 0 || heat == -1)
+            return;
+        if (tick % 20 == 0)
+            level.playLocalSound(worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), SoundEvents.FIRE_AMBIENT, SoundSource.BLOCKS, heat * 0.3f, 1f, true);
+
+        // Particles spawn in a square around the top of the burner.
+        //   0 1 2 3
+        //   4 5 6 7
+        //   8 9 A B
+        //   C D E F
+        // We don't want them to spawn in the center (points 5-6/9-10).
+        switch (tick & 15){ case 5, 6, 9, 10: return; }
+
+        addParticle(ParticleTypes.SMOKE, valveOrRedstoneState, 0.75);
+        if (redstonePower != 0 && heat >= 1.8f) {
+            if (chance(1)) {
+                addParticle(ParticleTypes.LARGE_SMOKE, valveOrRedstoneState, 0.75);
+            }
+
+            if (chance(1)) {
+                addParticle(ParticleTypes.FLAME, valveOrRedstoneState, 0.75);
+                addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, valveState, 1.75);
+            }
+        }
+
+        if (heat >= 1.8f && chance((int) (1+heat*2))) {
+            addParticle(ParticleTypes.SOUL_FIRE_FLAME, valveOrRedstoneState, 0.75);
+        } else {
+            addParticle(ParticleTypes.FLAME, valveOrRedstoneState, 0.75);
+        }
+    }
+

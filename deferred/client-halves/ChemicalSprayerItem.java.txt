@@ -1,0 +1,15 @@
+// from content/tools/ChemicalSprayerItem.java
+    @Environment(EnvType.CLIENT)
+    public void registerExtension(RegisterClientExtensionsEvent event) {
+        event.registerItem(SimpleCustomRenderer.create(this, new ChemicalSprayerItemRenderer()), this);
+    }
+
+
+// arm pose (no Fly analogue) - P8
+    @Override
+    public HumanoidModel.ArmPose getArmPose(ItemStack stack, AbstractClientPlayer player, InteractionHand hand) {
+        if (player.swinging)
+            return null;
+        return HumanoidModel.ArmPose.CROSSBOW_HOLD;
+    }
+

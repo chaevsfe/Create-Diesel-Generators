@@ -1,0 +1,7 @@
+// from content/tools/wire_cutters/WireCuttersItem.java
+    @Environment(EnvType.CLIENT)
+    public void registerExtension(RegisterClientExtensionsEvent event) {
+        event.registerItem(SimpleCustomRenderer.create(this, new WireCuttersItemRenderer()), this);
+    }
+
+

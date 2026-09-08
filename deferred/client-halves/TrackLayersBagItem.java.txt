@@ -1,0 +1,35 @@
+// model overrides / item model datagen - P8
+    public void registerModelOverrides() {
+       CatnipServices.PLATFORM.executeOnClientOnly(() -> () ->
+               ItemProperties.register(CDGItems.TRACK_LAYERS_BAG.get(), CreateDieselGenerators.rl("tracks"),
+               (stack, level, entity, seed) -> getTracks(stack).getCount()));
+    }
+
+    public static ItemModelBuilder addOverrideModels(DataGenContext<Item, TrackLayersBagItem> c,
+                                                     RegistrateItemModelProvider p) {
+        ItemModelBuilder builder = p.generated(c::get);
+
+        builder.override()
+                .predicate(CreateDieselGenerators.rl("tracks"), 0.01f)
+                .model(p.getBuilder(c.getName() + "_filled")
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", CreateDieselGenerators.rl("item/track_layers_bag_filled")))
+                .end();
+        return builder;
+    }
+
+    public static ItemStack full() {
+        ItemStack stack = CDGItems.TRACK_LAYERS_BAG.asStack();
+        ((TrackLayersBagItem)stack.getItem()).add(stack, AllBlocks.TRACK.asStack(1024));
+        return stack;
+    }
+
+
+// tooltip image - P8
+    public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        ItemStack track = getTracks(stack);
+        if(track.isEmpty())
+            return Optional.empty();
+        return Optional.of(new TrackLayersBagComponent(track));
+    }
+

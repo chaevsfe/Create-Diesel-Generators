@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "priority": 1177,
+  "package": "com.jesz.createdieselgenerators.mixins",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ContraptionMixin",
+    "CopycatBlockMixin",
+    "CreeperMixin",
+    "EntityMixin",
+    "ItemEntityMixin",
+    "LootItemAccessor",
+    "LootPoolAccessor",
+    "LootTableAccessor",
+    "MechanicalPressBlockEntityMixin",
+    "ServerExplosionMixin",
+    "ShaftBlockMixin",
+    "TankSegmentAccessor",
+    "UseOnContextInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

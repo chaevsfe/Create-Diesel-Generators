@@ -1,0 +1,87 @@
+package com.jesz.createdieselgenerators.content.diesel_engine;
+
+import com.jesz.createdieselgenerators.CDGConfig;
+import com.jesz.createdieselgenerators.CDGRegistries;
+import com.jesz.createdieselgenerators.content.diesel_engine.normal.DieselEngineBlock;
+import com.jesz.createdieselgenerators.fuel_type.FuelType;
+import com.zurrtum.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.zurrtum.create.foundation.blockEntity.SmartBlockEntity;
+import com.zurrtum.create.infrastructure.fluids.FluidStack;
+import com.zurrtum.create.foundation.fluid.FluidTank;
+
+public interface IEngine {
+
+    default boolean enabled() {
+        if (!validFS())
+            return false;
+        if (CDGConfig.server().ANALOG_SPEED_CONTROL.get())
+            return true;
+        return !(CDGConfig.server().ENGINES_DISABLED_WITH_REDSTONE.get()
+                && self().getBlockState().getValue(DieselEngineBlock.POWERED));
+    }
+
+    FuelType getCachedFuelType();
+    void setCachedFuelType(FuelType type);
+    FluidStack getLastCachedFluid();
+    void setLastCachedFluid(FluidStack fluid);
+    float getCachedFuelSpeed();
+    void setCachedFuelSpeed(float speed);
+    float getCachedFuelCapacity();
+    void setCachedFuelCapacity(float capacity);
+    float getCachedBurnRate();
+    void setCachedBurnRate(float rate);
+
+    default void invalidateFuelCache() {
+        setLastCachedFluid(FluidStack.EMPTY);
+    }
+
+    default FuelType getFuelType() {
+        FluidStack current = getTank().getStack(0);
+        if (!FluidStack.areFluidsAndComponentsEqualIgnoreCapacity(current, getLastCachedFluid())) {
+            setLastCachedFluid(current.copy());
+            FuelType type = FuelType.getTypeFor(
+                    self().getLevel().registryAccess().lookupOrThrow(CDGRegistries.FUEL_TYPE),
+                    current.getFluid());
+            setCachedFuelType(type);
+            float speed = type.getGenerated(self()).speed();
+            setCachedFuelSpeed(speed);
+            setCachedFuelCapacity(speed == 0 ? 0 :
+                    type.getGenerated(self()).strength() / speed);
+            setCachedBurnRate(type.getGenerated(self()).burn());
+        }
+        return getCachedFuelType();
+    }
+
+    default boolean validFS() {
+        if (fs().isEmpty()) return false;
+        return getFuelType() != FuelType.EMPTY;
+    }
+
+    default FluidStack fs() {
+        return getTank().getStack(0);
+    }
+
+    default float getFuelSpeed() { getFuelType(); return getCachedFuelSpeed(); }
+    default float getFuelCapacity() { getFuelType(); return getCachedFuelCapacity(); }
+    default float getFuelBurnRate() { getFuelType(); return getCachedBurnRate(); }
+    default float getFuelSoundPitch() { return getFuelType().soundPitch(); }
+
+    int getAnalogSignal();
+
+    default float getThrottle() {
+        return CDGConfig.server().ANALOG_SPEED_CONTROL.get() ? (15 - getAnalogSignal()) / 15f : 1f;
+    }
+
+    default float getFuelThrottle() {
+        float throttle = getThrottle();
+        if (throttle == 0f) return 0f;
+        return 0.25f + (throttle * 0.75f);
+    }
+
+    SmartBlockEntity self();
+
+    com.zurrtum.create.infrastructure.fluids.FluidInventory getTank();
+
+    EngineUpgrades getUpgrade();
+    void setUpgrade(EngineUpgrades upgrade);
+}

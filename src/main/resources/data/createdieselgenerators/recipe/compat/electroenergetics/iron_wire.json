@@ -1,0 +1,18 @@
+{
+  "type": "createdieselgenerators:wire_cutting",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "electroenergetics"
+      ]
+    }
+  ],
+  "ingredient": "#c:plates/iron",
+  "results": [
+    {
+      "id": "electroenergetics:iron_wire",
+      "count": 3
+    }
+  ]
+}
