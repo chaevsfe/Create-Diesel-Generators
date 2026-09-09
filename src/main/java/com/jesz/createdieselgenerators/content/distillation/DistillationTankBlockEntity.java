@@ -60,6 +60,7 @@ public class DistillationTankBlockEntity extends SmartBlockEntity implements IMu
     private static final int MAX_SIZE = 3;
 
     public float progress;
+    public int processingDuration;
     protected FluidInventory fluidCapability;
     protected boolean forceFluidLevelUpdate;
     public FluidTank tankInventory;
@@ -285,7 +286,10 @@ public class DistillationTankBlockEntity extends SmartBlockEntity implements IMu
     }
     protected List<Recipe<?>> getMatchingRecipes() {
 
-        List<RecipeHolder<? extends Recipe<?>>> list = RecipeFinder.get(getRecipeCacheKey(), (net.minecraft.server.level.ServerLevel) level, recipe -> recipe.value().getType() == CDGRecipes.DISTILLATION.getType());
+        if (!(level instanceof net.minecraft.server.level.ServerLevel serverLevel))
+            return List.of();
+
+        List<RecipeHolder<? extends Recipe<?>>> list = RecipeFinder.get(getRecipeCacheKey(), serverLevel, recipe -> recipe.value().getType() == CDGRecipes.DISTILLATION.getType());
         return list.stream()
                 .map(RecipeHolder::value)
                 .sorted((r1, r2) -> {
@@ -547,6 +551,7 @@ public class DistillationTankBlockEntity extends SmartBlockEntity implements IMu
                         .startWithValue(fillState);
             fluidLevel.chase(fillState, 0.5f, LerpedFloat.Chaser.EXP);
             processingTime = tag.getIntOr("Progress", 0);
+            processingDuration = tag.getIntOr("RecipeDuration", 0);
         }
         if (luminosity != prevLum && hasLevel())
             level.getChunkSource()
@@ -585,6 +590,7 @@ public class DistillationTankBlockEntity extends SmartBlockEntity implements IMu
             tag.putInt("Size", width);
             tag.putInt("Height", height);
             tag.putInt("Progress", processingTime);
+            tag.putInt("RecipeDuration", currentRecipe == null ? 0 : currentRecipe.getProcessingDuration());
 
         }
         tag.putInt("Luminosity", luminosity);

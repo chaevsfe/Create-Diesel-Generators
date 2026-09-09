@@ -89,8 +89,8 @@ public class DistillationTankRenderer implements BlockEntityRenderer<Distillatio
 
         float dialPivotY = 6f / 16;
         float dialPivotZ = 8f / 16;
-        float progress = Mth.clamp(be.currentRecipe == null ? be.progress
-                : (be.processingTime - partialTicks) / be.currentRecipe.getProcessingDuration(), 0, 1);
+        float progress = Mth.clamp(be.processingDuration <= 0 ? be.progress
+                : (be.processingTime - partialTicks) / be.processingDuration, 0, 1);
 
         for (Direction d : Iterate.horizontalDirections) {
             state.gauges.add(CachedBuffers.partial(CDGPartialModels.DISTILLATION_GAUGE, blockState)
