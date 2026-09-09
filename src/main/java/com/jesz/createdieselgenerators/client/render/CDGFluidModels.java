@@ -30,6 +30,5 @@ public final class CDGFluidModels {
         CDGFluidHolder holder = entry.getHolder();
         FluidModel.Unbaked model = new FluidModel.Unbaked(new Material(holder.stillTexture), new Material(holder.flowingTexture), null, null);
         AllFluidConfigs.MODEL.put(holder.still, model);
-        AllFluidConfigs.MODEL.put(holder.flowing, model);
     }
 }
