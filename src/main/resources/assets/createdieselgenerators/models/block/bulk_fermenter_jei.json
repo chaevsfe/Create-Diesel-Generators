@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:block/cube_column",
+	"parent": "minecraft:block/block",
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "createdieselgenerators:block/bulk_fermenter/top_connected",
