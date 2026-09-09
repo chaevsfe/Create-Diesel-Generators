@@ -1,6 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
+		"particle": "createdieselgenerators:block/andesite_girder",
 		"0": "createdieselgenerators:block/andesite_girder"
 	},
 	"render_type": "cutout",
