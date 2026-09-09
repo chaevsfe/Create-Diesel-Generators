@@ -31,6 +31,12 @@
     ],
     "create_plugin": [
       "com.jesz.createdieselgenerators.CreateDieselGeneratorsPlugin"
+    ],
+    "rei_common": [
+      "com.jesz.createdieselgenerators.compat.rei.CDGReiCommonPlugin"
+    ],
+    "rei_client": [
+      "com.jesz.createdieselgenerators.compat.rei.CDGReiClientPlugin"
     ]
   },
   "accessWidener": "createdieselgenerators.accesswidener",
@@ -47,5 +53,9 @@
     "fabric-api": "*",
     "create": "${create_fabric_version_range}",
     "java": ">=25"
+  },
+  "suggests": {
+    "createreiviewer": "*",
+    "roughlyenoughitems": "*"
   }
 }
