@@ -21,11 +21,11 @@ public class DistillationCategory extends CreateReiCategory<CreateReiDisplay> {
     private static final int TOWER_X = 93;
     private static final int TOWER_BASE_Y = 140;
     private static final int TOWER_STEP = 20;
-    private static final int TOWER_TOP_MARGIN = 24;
+    private static final int TOWER_TOP_MARGIN = 6;
     private static final int OUTPUT_BASE_Y = 127;
     private static final int OUTPUT_STEP = 23;
     private static final int CONTENT_BOTTOM = 190;
-    private static final int MAX_TIERS = 4;
+    private static final int MAX_TIERS = 3;
     private static final int MARGIN = 4;
 
     public DistillationCategory() {
