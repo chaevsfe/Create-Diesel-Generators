@@ -18,17 +18,19 @@ public class CDGKineticGoggleBehaviour<T extends KineticBlockEntity> extends Kin
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        int before = tooltip.size();
         boolean added = super.addToGoggleTooltip(tooltip, isPlayerSneaking);
         if (blockEntity instanceof IHaveGoggleInformation goggles)
             added |= goggles.addToGoggleTooltip(tooltip, isPlayerSneaking);
-        return added;
+        return added && tooltip.size() > before;
     }
 
     @Override
     public boolean addToTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        int before = tooltip.size();
         boolean added = super.addToTooltip(tooltip, isPlayerSneaking);
         if (blockEntity instanceof IHaveHoveringInformation hovering)
             added |= hovering.addToTooltip(tooltip, isPlayerSneaking);
-        return added;
+        return added && tooltip.size() > before;
     }
 }

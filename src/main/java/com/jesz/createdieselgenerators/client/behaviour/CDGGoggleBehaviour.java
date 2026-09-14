@@ -18,11 +18,17 @@ public class CDGGoggleBehaviour extends TooltipBehaviour<SmartBlockEntity> imple
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        return blockEntity instanceof IHaveGoggleInformation goggles && goggles.addToGoggleTooltip(tooltip, isPlayerSneaking);
+        if (!(blockEntity instanceof IHaveGoggleInformation goggles))
+            return false;
+        int before = tooltip.size();
+        return goggles.addToGoggleTooltip(tooltip, isPlayerSneaking) && tooltip.size() > before;
     }
 
     @Override
     public boolean addToTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        return blockEntity instanceof IHaveHoveringInformation hovering && hovering.addToTooltip(tooltip, isPlayerSneaking);
+        if (!(blockEntity instanceof IHaveHoveringInformation hovering))
+            return false;
+        int before = tooltip.size();
+        return hovering.addToTooltip(tooltip, isPlayerSneaking) && tooltip.size() > before;
     }
 }
