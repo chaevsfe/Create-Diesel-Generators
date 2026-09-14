@@ -551,6 +551,7 @@ public class BulkFermenterBlockEntity extends SmartBlockEntity implements IMulti
 
         boolean isEmpty = true;
 
+        int headerIndex = tooltip.size();
         CreateLang.translate("gui.goggles.basin_contents")
                 .forGoggles(tooltip);
 
@@ -592,7 +593,7 @@ public class BulkFermenterBlockEntity extends SmartBlockEntity implements IMulti
         }
 
         if (isEmpty)
-            tooltip.remove(0);
+            tooltip.remove(headerIndex);
 
         return true;
     }
