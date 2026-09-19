@@ -64,7 +64,7 @@ public class CDGBlocks {
             
             .onRegister((b) -> BoilerHeater.REGISTRY.register(b, ((level, pos, state) -> {
                 if(level.getBlockEntity(pos) instanceof BurnerBlockEntity be)
-                    return state.getValue(BurnerBlock.LIT) ? be.heat : -1;
+                    return state.getValue(BurnerBlock.LIT) ? Math.min(2, be.heat) : -1;
                 return -1;
             })))
             .item().build()
