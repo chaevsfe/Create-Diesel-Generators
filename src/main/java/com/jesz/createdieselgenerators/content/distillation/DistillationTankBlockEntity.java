@@ -53,7 +53,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import com.jesz.createdieselgenerators.CDGFluids;
 
 public class DistillationTankBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation, IHaveHoveringInformation {

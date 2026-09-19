@@ -11,7 +11,7 @@ import com.jesz.createdieselgenerators.content.canister.SpoutCanisterFilling;
 import com.jesz.createdieselgenerators.content.molds.BasinSpoutCasting;
 import com.zurrtum.create.AllBlockEntityTypes;
 import com.zurrtum.create.api.behaviour.spouting.BlockSpoutingBehaviour;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class ModEvents {
     public static void setup() {

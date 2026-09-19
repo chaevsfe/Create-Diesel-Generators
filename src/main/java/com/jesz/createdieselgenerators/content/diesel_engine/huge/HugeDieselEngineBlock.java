@@ -20,7 +20,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -53,7 +52,7 @@ import net.minecraft.world.level.LevelAccessor;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.AllFluidItemInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidItemInventory;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngineBlockEntity>, IWrenchable, FluidInventoryProvider<HugeDieselEngineBlockEntity> {
 

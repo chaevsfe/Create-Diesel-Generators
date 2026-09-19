@@ -21,7 +21,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class PumpjackScene {
     public static void scene(SceneBuilder builder, SceneBuildingUtil util) {

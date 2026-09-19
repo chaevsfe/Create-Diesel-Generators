@@ -21,7 +21,6 @@ import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.*;
 import java.util.function.Predicate;
-import net.minecraft.world.entity.EntityTypes;
 
 public interface EntityAttribute {
     Codec<EntityAttribute> CODEC = RecordCodecBuilder.create(i -> i.group(
@@ -47,7 +46,7 @@ public interface EntityAttribute {
 
     List<EntityAttribute> ALL = new ArrayList<>();
     EntityAttribute STANDARD_TRAITS = register(StandardTraits.IS_HOSTILE);
-    EntityAttribute IS_MOB = register(new IsMob(EntityTypes.PIG));
+    EntityAttribute IS_MOB = register(new IsMob(EntityType.PIG));
 
     static EntityAttribute register(EntityAttribute attribute) {
         ALL.add(attribute);

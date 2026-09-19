@@ -30,7 +30,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import com.zurrtum.create.infrastructure.fluids.FluidStack;
-import com.zurrtum.create.infrastructure.fluids.FluidStack;
 
 import java.util.List;
 import net.minecraft.world.level.LevelReader;
@@ -39,7 +38,7 @@ import net.minecraft.util.RandomSource;
 import com.zurrtum.create.infrastructure.fluids.FluidInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import com.jesz.createdieselgenerators.content.fluids.SimpleFluidContent;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 public class CanisterBlock extends Block implements IBE<CanisterBlockEntity>, ProperWaterloggedBlock, IWrenchable, FluidInventoryProvider<CanisterBlockEntity> {

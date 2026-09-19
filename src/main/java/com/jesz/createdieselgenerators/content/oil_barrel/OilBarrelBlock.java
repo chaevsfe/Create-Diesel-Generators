@@ -10,12 +10,10 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
@@ -36,7 +34,7 @@ import net.minecraft.server.level.ServerLevel;
 import com.zurrtum.create.infrastructure.fluids.FluidInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class OilBarrelBlock extends Block implements IBE<OilBarrelBlockEntity>, IWrenchable, FluidInventoryProvider<OilBarrelBlockEntity> {
 

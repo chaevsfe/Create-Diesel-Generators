@@ -24,7 +24,7 @@ import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.util.RandomSource;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class BulkFermenterBlock extends Block implements IBE<BulkFermenterBlockEntity>, IWrenchable,
         ItemInventoryProvider<BulkFermenterBlockEntity>, FluidInventoryProvider<BulkFermenterBlockEntity> {

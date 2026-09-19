@@ -24,7 +24,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.hurtingprojectile.AbstractHurtingProjectile;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -75,7 +74,7 @@ public class ChemicalSprayerProjectileEntity extends AbstractHurtingProjectile {
             target.hurt(damageSources().inFire(), 2);
         } else if (cooling) {
             target.clearFire();
-            if (target.getType() == EntityTypes.ENDERMAN)
+            if (target.getType() == EntityType.ENDERMAN)
                 target.hurt(damageSources().generic(), 0.5f);
         } else if (stack.getFluid().isSame(AllFluids.POTION)) {
             if (target instanceof LivingEntity le && le.isAffectedByPotions()) {
@@ -84,9 +83,9 @@ public class ChemicalSprayerProjectileEntity extends AbstractHurtingProjectile {
                     for (MobEffectInstance effectInstance : potionContents.getAllEffects()) {
                         MobEffect effect = effectInstance.getEffect().value();
 
-                        if (effect.isInstantaneous()) {
+                        if (effect.isInstantenous()) {
                             if (level() instanceof ServerLevel serverLevel)
-                                effect.applyInstantaneousEffect(serverLevel, this, owner, le, effectInstance.getAmplifier(), 0.5d);
+                                effect.applyInstantenousEffect(serverLevel, this, owner, le, effectInstance.getAmplifier(), 0.5d);
                         } else {
                             le.addEffect(new MobEffectInstance(effectInstance), owner);
                         }

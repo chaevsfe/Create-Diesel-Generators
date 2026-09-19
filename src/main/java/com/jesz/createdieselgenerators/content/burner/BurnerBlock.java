@@ -23,7 +23,7 @@ import com.zurrtum.create.infrastructure.fluids.FluidInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.core.Direction;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class BurnerBlock extends HorizontalAxisKineticBlock implements IBE<BurnerBlockEntity>, FluidInventoryProvider<BurnerBlockEntity> {
 

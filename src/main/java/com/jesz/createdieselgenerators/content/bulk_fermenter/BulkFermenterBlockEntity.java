@@ -29,7 +29,6 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -44,7 +43,7 @@ import com.zurrtum.create.infrastructure.items.CombinedInvWrapper;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 import com.jesz.createdieselgenerators.CDGFluids;
 
 public class BulkFermenterBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainerFluidItem, IHaveGoggleInformation {

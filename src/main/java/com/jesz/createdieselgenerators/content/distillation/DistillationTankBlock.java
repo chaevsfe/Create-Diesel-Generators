@@ -48,7 +48,7 @@ import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.server.level.ServerLevel;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class DistillationTankBlock extends Block implements IBE<DistillationTankBlockEntity>, IWrenchable, SpecialBlockItemRequirement, FluidInventoryProvider<DistillationTankBlockEntity> {
 

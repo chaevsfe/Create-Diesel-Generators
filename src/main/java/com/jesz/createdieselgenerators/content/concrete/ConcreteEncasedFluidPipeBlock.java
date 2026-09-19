@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.ticks.TickPriority;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class ConcreteEncasedFluidPipeBlock extends EncasedPipeBlock {
     public ConcreteEncasedFluidPipeBlock(Properties properties) {

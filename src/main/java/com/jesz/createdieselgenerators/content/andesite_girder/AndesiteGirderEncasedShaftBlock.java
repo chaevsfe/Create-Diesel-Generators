@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.WATERLOGGED;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class AndesiteGirderEncasedShaftBlock extends GirderEncasedShaftBlock {
     public AndesiteGirderEncasedShaftBlock(Properties properties) {

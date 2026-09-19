@@ -15,7 +15,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
@@ -57,7 +56,7 @@ import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.AllFluidItemInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidItemInventory;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class DieselEngineBlock extends DirectionalKineticBlock implements SpecialBlockItemRequirement, IBE<DieselEngineBlockEntity>, ProperWaterloggedBlock, FluidInventoryProvider<DieselEngineBlockEntity> {
 

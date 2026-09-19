@@ -17,7 +17,7 @@ import com.zurrtum.create.infrastructure.fluids.FluidInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.entity.EntityType;
 
 public class PumpjackHoleBlock extends Block implements IBE<PumpjackHoleBlockEntity>, IWrenchable, FluidInventoryProvider<PumpjackHoleBlockEntity> {
 

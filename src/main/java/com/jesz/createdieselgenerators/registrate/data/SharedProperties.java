@@ -22,7 +22,7 @@ public class SharedProperties {
     }
 
     public static Block copperMetal() {
-        return Blocks.COPPER_BLOCK.weathering().pick(net.minecraft.world.level.block.WeatheringCopper.WeatherState.UNAFFECTED);
+        return Blocks.COPPER_BLOCK;
     }
 
     public static Block netheriteMetal() {
