@@ -3,7 +3,7 @@
   "id": "createdieselgenerators",
   "version": "${version}",
   "name": "Create Fly: Diesel Generators",
-  "description": "Create: Diesel Generators port for Create Fly 26.2. Oil prospecting and extraction, distillation and fermentation, and a family of diesel engines that burn the fuels you refine.",
+  "description": "Create: Diesel Generators port for Create Fly 26.1.2. Oil prospecting and extraction, distillation and fermentation, and a family of diesel engines that burn the fuels you refine.",
   "authors": [
     "George VI",
     "chaevsfe"
