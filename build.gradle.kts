@@ -1,4 +1,5 @@
 import java.util.zip.ZipFile
+import javax.imageio.ImageIO
 
 plugins {
     id("net.fabricmc.fabric-loom") version "1.16-SNAPSHOT"
@@ -85,7 +86,63 @@ tasks.withType<AbstractCopyTask>().configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
+val generatedConnectedTextureResources = layout.buildDirectory.dir("generated/connected-texture-resources")
+
+val crossTileIndexes = (1..15).toList()
+val rectangleTileIndexes = (0..11).toList() + (13..15).toList()
+
+val connectedTextureSheets = mapOf(
+    "assets/createdieselgenerators/textures/block/diesel_engine_big_connected.png" to (4 to crossTileIndexes),
+    "assets/createdieselgenerators/textures/block/bulk_fermenter/*_connected.png" to (4 to rectangleTileIndexes),
+    "assets/createdieselgenerators/textures/block/distillation_tower/*_connected.png" to (4 to rectangleTileIndexes),
+    "assets/createdieselgenerators/textures/block/oil_barrel/**/*_connected.png" to (4 to rectangleTileIndexes),
+)
+val connectedTextureSheetsAlsoUsedByModels = listOf(
+    "assets/createdieselgenerators/textures/block/bulk_fermenter/*_connected.png",
+    "assets/createdieselgenerators/textures/block/distillation_tower/*_connected.png",
+)
+
+val generateConnectedTextureSprites = tasks.register("generateConnectedTextureSprites") {
+    val resourceRoot = file("src/main/resources")
+    inputs.files(fileTree(resourceRoot) { include(connectedTextureSheets.keys) })
+        .withPropertyName("connectedTextureSheets")
+        .withPathSensitivity(PathSensitivity.RELATIVE)
+    inputs.property("connectedTextureLayout", "create-fly-26.2-v1")
+    outputs.dir(generatedConnectedTextureResources)
+    doLast {
+        val outputRoot = generatedConnectedTextureResources.get().asFile
+        delete(outputRoot)
+        var sheetCount = 0
+        var spriteCount = 0
+        connectedTextureSheets.forEach { (pattern, layout) ->
+            val (gridSize, tileIndexes) = layout
+            fileTree(resourceRoot) { include(pattern) }.files.sortedBy { it.invariantSeparatorsPath }.forEach { sheetFile ->
+                val sheet = ImageIO.read(sheetFile) ?: throw GradleException("Could not decode $sheetFile")
+                if (sheet.width != sheet.height || sheet.width % gridSize != 0) {
+                    throw GradleException("$sheetFile must be a $gridSize x $gridSize grid of square tiles, but is ${sheet.width} x ${sheet.height}")
+                }
+                val tileSize = sheet.width / gridSize
+                val relativeSheet = resourceRoot.toPath().relativize(sheetFile.toPath()).toString()
+                val spriteDirectory = outputRoot.resolve(relativeSheet.removeSuffix(".png"))
+                spriteDirectory.mkdirs()
+                tileIndexes.forEachIndexed { index, sourceTileIndex ->
+                    val tile = sheet.getSubimage(sourceTileIndex % gridSize * tileSize, sourceTileIndex / gridSize * tileSize, tileSize, tileSize)
+                    if (!ImageIO.write(tile, "png", spriteDirectory.resolve("${index + 1}.png"))) {
+                        throw GradleException("No PNG writer is available for $spriteDirectory")
+                    }
+                    spriteCount++
+                }
+                sheetCount++
+            }
+        }
+        logger.lifecycle("Generated $spriteCount connected-texture sprites from $sheetCount sheets")
+    }
+}
+
 tasks.processResources {
+    dependsOn(generateConnectedTextureSprites)
+    from(generatedConnectedTextureResources)
+    exclude(connectedTextureSheets.keys - connectedTextureSheetsAlsoUsedByModels.toSet())
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     val modMetadata = mapOf(
         "version" to project.version.toString(),
