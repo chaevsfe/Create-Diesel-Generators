@@ -1,6 +1,7 @@
 package com.jesz.createdieselgenerators.client;
 
 import com.jesz.createdieselgenerators.CDGPartialModels;
+import com.jesz.createdieselgenerators.CDGSpriteShifts;
 import com.jesz.createdieselgenerators.client.model.CDGItemModels;
 import com.jesz.createdieselgenerators.client.behaviour.CDGTooltipBehaviours;
 import com.jesz.createdieselgenerators.client.gui.CDGScreens;
@@ -22,6 +23,7 @@ public final class CDGClient {
 
     public static void initClient() {
         CDGPartialModels.init();
+        CDGSpriteShifts.init();
         CDGRegistrateClient.flush();
         CDGItemProperties.register();
         CDGItemModels.register();
