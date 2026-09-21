@@ -4,6 +4,8 @@ import com.zurrtum.create.api.connectivity.ConnectivityHandler;
 import com.zurrtum.create.foundation.block.IBE;
 import com.zurrtum.create.foundation.blockEntity.IMultiBlockEntityContainer;
 import com.zurrtum.create.catnip.math.VecHelper;
+import com.zurrtum.create.foundation.item.ItemPlacementSoundContext;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,6 +27,9 @@ import net.minecraft.world.item.component.TypedEntityData;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class MultiBlockContainerBlockItem extends BlockItem {
+    public static final SoundType SILENCED_METAL = new SoundType(0.1F, 1.5F, SoundEvents.METAL_BREAK,
+            SoundEvents.METAL_STEP, SoundEvents.METAL_PLACE, SoundEvents.METAL_HIT, SoundEvents.METAL_FALL);
+
     BlockEntityType<?> type;
     public MultiBlockContainerBlockItem(Block block, Properties properties) {
         super(block, properties);
@@ -113,6 +119,8 @@ public class MultiBlockContainerBlockItem extends BlockItem {
         if (!player.isCreative() && stack.getCount() < tanksToPlace)
             return;
 
+        ItemPlacementSoundContext quietContext = new ItemPlacementSoundContext(ctx, 0.1f, 1.5f,
+                SILENCED_METAL.getPlaceSound());
         for (int xOffset = 0; xOffset < width; xOffset++) {
             for (int zOffset = 0; zOffset < width; zOffset++) {
                 BlockPos offsetPos = blockAxis == Direction.Axis.X ? startPos.offset(0, xOffset, zOffset)
@@ -121,8 +129,7 @@ public class MultiBlockContainerBlockItem extends BlockItem {
                 BlockState blockState = world.getBlockState(offsetPos);
                 if (blockState.getBlock() == getBlock())
                     continue;
-                BlockPlaceContext context = BlockPlaceContext.at(ctx, offsetPos, face);
-                super.place(context);
+                super.place(quietContext.offset(offsetPos, face));
             }
         }
     }
