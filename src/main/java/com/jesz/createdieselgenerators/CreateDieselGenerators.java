@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators;
 
+import com.jesz.createdieselgenerators.compat.CDGRecipeSync;
 import com.jesz.createdieselgenerators.compat.strut_your_stuff.StrutYourStuffBlockEntityTypes;
 import com.jesz.createdieselgenerators.compat.strut_your_stuff.StrutYourStuffRegistryEntries;
 import com.jesz.createdieselgenerators.content.molds.MoldType;
@@ -51,6 +52,7 @@ public class CreateDieselGenerators {
         CDGEntityTypes.register();
         CDGSoundEvents.register();
         CDGRecipes.register();
+        CDGRecipeSync.register();
         CDGMenuTypes.register();
         MoldType.register();
         CDGMountedStorageTypes.register();
