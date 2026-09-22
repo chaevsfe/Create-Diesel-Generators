@@ -27,8 +27,8 @@ the train-mounted engine sound and the pumpjack crank and hole ambient loops, so
 
 - `compat/jei/**` (13 files) — JEI breaks multiplayer joins on Create Fly; REI is the project
   default, so the recipe viewer half is rebuilt later, not ported.
-- `compat/kubejs/**`, `compat/strut_your_stuff/**`, `compat/EveryCompatCompat.java` — optional
-  companion mods with no verified Fabric 26.2 build.
+- `compat/kubejs/**`, `compat/EveryCompatCompat.java` — optional companion mods with no verified
+  Fabric 26.2 build.
 - `events/datagen/**` and the four `*Generator` blockstate providers — the port ships upstream's
   committed `src/generated/resources` instead of running datagen.
 - `assets/everycomp/**`, `assets/quark/**` — art for blocks those companion mods generate.

@@ -1,5 +1,7 @@
 package com.jesz.createdieselgenerators;
 
+import com.jesz.createdieselgenerators.compat.strut_your_stuff.StrutYourStuffBlockEntityTypes;
+import com.jesz.createdieselgenerators.compat.strut_your_stuff.StrutYourStuffRegistryEntries;
 import com.jesz.createdieselgenerators.content.molds.MoldType;
 import com.jesz.createdieselgenerators.events.GameEvents;
 import com.jesz.createdieselgenerators.packets.CDGPackets;
@@ -9,6 +11,7 @@ import com.zurrtum.create.client.foundation.item.ItemDescription;
 import com.zurrtum.create.client.foundation.item.KineticStats;
 import com.zurrtum.create.client.foundation.item.TooltipModifier;
 import com.zurrtum.create.compat.Mods;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
@@ -28,6 +31,8 @@ public class CreateDieselGenerators {
     public static void registerBlocksEarly() {
         CDGDisplaySources.register();
         CDGBlocks.register();
+        if (FabricLoader.getInstance().isModLoaded("struts"))
+            StrutYourStuffRegistryEntries.register();
         com.jesz.createdieselgenerators.registrate.Registrate.registerFluidBlocks();
     }
 
@@ -41,6 +46,8 @@ public class CreateDieselGenerators {
         com.jesz.createdieselgenerators.registrate.Registrate.registerFluidItems();
         CDGItems.register();
         CDGBlockEntityTypes.register();
+        if (FabricLoader.getInstance().isModLoaded("struts"))
+            StrutYourStuffBlockEntityTypes.register();
         CDGEntityTypes.register();
         CDGSoundEvents.register();
         CDGRecipes.register();

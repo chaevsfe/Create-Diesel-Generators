@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators;
 
+import com.jesz.createdieselgenerators.compat.strut_your_stuff.StrutYourStuffRegistryEntries;
 import com.jesz.createdieselgenerators.content.molds.MoldType;
 import com.jesz.createdieselgenerators.content.track_layers_bag.TrackLayersBagItem;
 import net.minecraft.core.registries.Registries;
@@ -9,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resources.ResourceKey;
 
 public class CDGCreativeTab {
@@ -49,6 +51,8 @@ public class CDGCreativeTab {
                         output.accept(CDGBlocks.ASPHALT_SLAB.get());
                         output.accept(CDGBlocks.BULK_FERMENTER.get());
                         output.accept(CDGBlocks.ANDESITE_GIRDER.get());
+                        if (FabricLoader.getInstance().isModLoaded("struts"))
+                            StrutYourStuffRegistryEntries.fillCreativeTab(output);
                         output.accept(CDGBlocks.BURNER.get());
                         output.accept(CDGBlocks.CHEMICAL_TURRET.get());
                         output.accept(CDGBlocks.SHEET_METAL_PANEL.get());
