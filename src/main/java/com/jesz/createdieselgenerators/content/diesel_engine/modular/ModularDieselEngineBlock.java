@@ -11,6 +11,7 @@ import com.zurrtum.create.content.kinetics.base.HorizontalKineticBlock;
 import com.zurrtum.create.content.kinetics.base.KineticBlockEntity;
 import com.zurrtum.create.content.schematics.requirement.ItemRequirement;
 import com.zurrtum.create.foundation.block.IBE;
+import com.zurrtum.create.foundation.block.RedStoneConnectBlock;
 import com.zurrtum.create.foundation.blockEntity.SmartBlockEntity;
 import com.zurrtum.create.foundation.placement.PoleHelper;
 import com.zurrtum.create.catnip.placement.IPlacementHelper;
@@ -60,7 +61,7 @@ import com.zurrtum.create.AllFluidItemInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidItemInventory;
 import net.minecraft.world.entity.EntityTypes;
 
-public class ModularDieselEngineBlock extends HorizontalKineticBlock implements IBE<ModularDieselEngineBlockEntity>, SpecialBlockItemRequirement, FluidInventoryProvider<ModularDieselEngineBlockEntity> {
+public class ModularDieselEngineBlock extends HorizontalKineticBlock implements IBE<ModularDieselEngineBlockEntity>, SpecialBlockItemRequirement, FluidInventoryProvider<ModularDieselEngineBlockEntity>, RedStoneConnectBlock {
 
     @Override
     public FluidInventory getFluidInventory(LevelAccessor world, BlockPos pos, BlockState state, ModularDieselEngineBlockEntity blockEntity, Direction side) {
@@ -81,6 +82,11 @@ public class ModularDieselEngineBlock extends HorizontalKineticBlock implements 
         registerDefaultState(super.defaultBlockState()
                 .setValue(PIPE, true)
                 .setValue(POWERED, false));
+    }
+
+    @Override
+    public boolean canConnectRedstone(BlockState state, Direction direction) {
+        return true;
     }
 
     @Override
