@@ -34,11 +34,6 @@ the train-mounted engine sound and the pumpjack crank and hole ambient loops, so
 - `assets/everycomp/**`, `assets/quark/**` — art for blocks those companion mods generate.
 - `CDGMixinPlugin` — only gated the Sable mixin, which is deleted.
 
-## Dropped features to confirm with the owner
-
-- The toolsmith villager trade for the Lighter: NeoForge `VillagerTradesEvent` has no Fabric API
-  equivalent in 0.155.0+26.2, so it needs a mixin or must stay dropped.
-
 ## Known limitations on Create Fly
 
 - The server config is not sent to clients. Create Fly's catnip config Builder has no networking at
