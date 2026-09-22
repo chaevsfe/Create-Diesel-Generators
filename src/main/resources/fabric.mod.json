@@ -32,11 +32,11 @@
     "create_plugin": [
       "com.jesz.createdieselgenerators.CreateDieselGeneratorsPlugin"
     ],
-    "rei_common": [
-      "com.jesz.createdieselgenerators.compat.rei.CDGReiCommonPlugin"
+    "createreiviewer": [
+      "com.jesz.createdieselgenerators.compat.viewer.CDGViewerPlugin"
     ],
-    "rei_client": [
-      "com.jesz.createdieselgenerators.compat.rei.CDGReiClientPlugin"
+    "createreiviewer_client": [
+      "com.jesz.createdieselgenerators.compat.viewer.CDGViewerClientPlugin"
     ]
   },
   "accessWidener": "createdieselgenerators.accesswidener",
@@ -57,6 +57,7 @@
   "suggests": {
     "createreiviewer": "*",
     "roughlyenoughitems": "*",
+    "jei": "*",
     "struts": "*"
   }
 }

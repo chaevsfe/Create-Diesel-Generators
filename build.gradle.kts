@@ -19,12 +19,6 @@ repositories {
     maven("https://api.modrinth.com/maven") {
         content { includeGroup("maven.modrinth") }
     }
-    maven("https://maven.shedaniel.me/") {
-        content {
-            includeGroup("me.shedaniel.cloth")
-            includeGroup("me.shedaniel.cloth.api")
-        }
-    }
 }
 
 // The recipe viewer is nested into this jar and compiled against: CI downloads its release
@@ -63,9 +57,6 @@ dependencies {
     implementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
     implementation("maven.modrinth:create-fly:${property("create_fabric_version")}")
 
-    compileOnly("maven.modrinth:rei:${property("rei_version")}")
-    compileOnly("maven.modrinth:architectury-api:${property("architectury_version")}")
-    compileOnly("me.shedaniel.cloth:basic-math:${property("basic_math_version")}")
     compileOnly(recipeViewer)
     include(recipeViewer)
     compileOnly(struts)
