@@ -2,7 +2,8 @@
 	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"2": "createdieselgenerators:block/andesite_girder"
+		"2": "createdieselgenerators:block/andesite_girder",
+		"particle": "createdieselgenerators:block/andesite_girder"
 	},
 	"elements": [
 		{
