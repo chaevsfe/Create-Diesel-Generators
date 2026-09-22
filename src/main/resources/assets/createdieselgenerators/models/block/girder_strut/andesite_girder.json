@@ -3,7 +3,8 @@
 	"credit": "Made with Blockbench",
 	"render_type": "cutout",
 	"textures": {
-		"0": "createdieselgenerators:block/andesite_girder"
+		"0": "createdieselgenerators:block/andesite_girder",
+		"particle": "createdieselgenerators:block/andesite_girder"
 	},
 	"elements": [
 		{
