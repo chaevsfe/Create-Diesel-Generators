@@ -29,6 +29,14 @@ jobs:
           mkdir -p libs
           curl -fsSL -o "libs/$VIEWER_JAR_NAME" "$VIEWER_JAR_URL"
 
+      - name: Fetch the Strut Your Stuff jar this mod compiles against
+        env:
+          STRUTS_JAR_NAME: StrutYourStuff-1.3.1-fly.26.2-beta.5+fabric-mc26.2.jar
+          STRUTS_JAR_URL: https://github.com/chaevsfe/StrutYourStuff/releases/download/1.3.1-fly.26.2-beta.5/StrutYourStuff-1.3.1-fly.26.2-beta.5%2Bfabric-mc26.2.jar
+        run: |
+          mkdir -p libs
+          curl -fsSL -o "libs/$STRUTS_JAR_NAME" "$STRUTS_JAR_URL"
+
       - name: Build from scratch
         run: ./gradlew clean build --no-build-cache --no-daemon
 

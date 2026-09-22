@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "struts"
+      ]
+    }
+  ],
+  "category": "misc",
+  "pattern": [
+    "A  ",
+    "GGG",
+    "  A"
+  ],
+  "key": {
+    "A": "create:andesite_alloy",
+    "G": "createdieselgenerators:andesite_girder"
+  },
+  "result": {
+    "id": "createdieselgenerators:andesite_girder_strut",
+    "count": 6
+  }
+}

@@ -31,10 +31,11 @@ repositories {
 // jar into libs/, a local checkout uses the sibling repo's build output.
 repositories {
     flatDir {
-        dirs("libs", "../../create-rei/CreateReiViewer-Fly/build/libs")
+        dirs("libs", "../../create-rei/CreateReiViewer-Fly/build/libs", "../../create-struts/StrutYourStuff-Fly/build/libs")
     }
 }
 val recipeViewer = ":CreateReiViewer:${property("createreiviewer_version")}+fabric-mc${property("minecraft_version")}"
+val struts = ":StrutYourStuff:${property("struts_version")}+fabric-mc${property("minecraft_version")}"
 
 loom {
     accessWidenerPath = file("src/main/resources/createdieselgenerators.accesswidener")
@@ -67,6 +68,7 @@ dependencies {
     compileOnly("me.shedaniel.cloth:basic-math:${property("basic_math_version")}")
     compileOnly(recipeViewer)
     include(recipeViewer)
+    compileOnly(struts)
     compileOnly("com.google.code.findbugs:jsr305:3.0.2")
 }
 

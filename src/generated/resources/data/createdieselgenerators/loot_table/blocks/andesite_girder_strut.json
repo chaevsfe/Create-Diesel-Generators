@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:block",
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:all_mods_loaded",
+      "values": [
+        "struts"
+      ]
+    }
+  ],
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "createdieselgenerators:andesite_girder_strut"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "createdieselgenerators:blocks/andesite_girder_strut"
+}
