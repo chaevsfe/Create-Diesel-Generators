@@ -3,20 +3,22 @@ package com.jesz.createdieselgenerators.client.gui.render;
 import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.zurrtum.create.client.catnip.render.CachedBuffers;
-import com.zurrtum.create.client.flywheel.lib.model.baked.PartialModel;
-import com.zurrtum.create.client.foundation.gui.render.GuiBlockRenderer;
 import com.zurrtum.create.catnip.data.Iterate;
+import com.zurrtum.create.client.flywheel.lib.model.baked.PartialModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 
 @Environment(EnvType.CLIENT)
-public class DistillationTowerRenderer extends GuiBlockRenderer<DistillationTowerRenderState> {
+public class DistillationTowerRenderer extends CDGGuiBlockRenderer<DistillationTowerRenderState> {
+    public DistillationTowerRenderer(MultiBufferSource.BufferSource bufferSource) {
+        super(bufferSource);
+    }
+
     @Override
-    protected void renderToTexture(DistillationTowerRenderState state, PoseStack matrices, SubmitNodeCollector queue) {
+    protected void render(DistillationTowerRenderState state, PoseStack matrices) {
         matrices.scale(1, 1, -1);
         matrices.mulPose(Axis.XP.rotationDegrees(-15.5f));
         matrices.mulPose(Axis.YP.rotationDegrees(22.5f));
@@ -30,7 +32,7 @@ public class DistillationTowerRenderer extends GuiBlockRenderer<DistillationTowe
             matrices.pushPose();
             matrices.translate(0, i, 0);
             matrices.rotateAround(Axis.YP.rotationDegrees(90), 0.5f, 0.5f, 0.5f);
-            CachedBuffers.partial(part, Blocks.AIR.defaultBlockState()).submit(matrices, queue);
+            partial(part, Blocks.AIR.defaultBlockState());
             matrices.popPose();
         }
 
@@ -38,7 +40,7 @@ public class DistillationTowerRenderer extends GuiBlockRenderer<DistillationTowe
             matrices.pushPose();
             matrices.rotateAround(Axis.YP.rotationDegrees(direction.toYRot()), 0.5f, 0.5f, 0.5f);
             matrices.translate(2 / 16f, 0, 0);
-            CachedBuffers.partial(CDGPartialModels.DISTILLATION_GAUGE, Blocks.AIR.defaultBlockState()).submit(matrices, queue);
+            partial(CDGPartialModels.DISTILLATION_GAUGE, Blocks.AIR.defaultBlockState());
             matrices.popPose();
         }
     }
