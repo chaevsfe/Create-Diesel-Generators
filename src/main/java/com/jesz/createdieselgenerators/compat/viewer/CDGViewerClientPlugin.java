@@ -1,6 +1,7 @@
 package com.jesz.createdieselgenerators.compat.viewer;
 
 import com.jesz.createdieselgenerators.CDGBlocks;
+import com.jesz.createdieselgenerators.CDGDataComponents;
 import com.jesz.createdieselgenerators.CDGItems;
 import com.jesz.createdieselgenerators.client.gui.render.BasinFermentingRenderState;
 import com.jesz.createdieselgenerators.client.gui.render.CastingSpoutRenderState;
@@ -9,6 +10,7 @@ import com.zurrtum.create.AllItems;
 import com.zurrtum.create.client.foundation.gui.AllGuiTextures;
 import com.zurrtum.create.client.foundation.gui.render.PressBasinRenderState;
 import com.zurrtum.create.content.processing.recipe.HeatCondition;
+import com.zurrtum.create.infrastructure.component.SandPaperItemComponent;
 import dev.chaevsfe.createreiviewer.api.ViewerIngredient;
 import dev.chaevsfe.createreiviewer.api.ViewerRecipe;
 import dev.chaevsfe.createreiviewer.api.ViewerStack;
@@ -18,6 +20,7 @@ import dev.chaevsfe.createreiviewer.api.client.ViewerCategory;
 import dev.chaevsfe.createreiviewer.api.client.ViewerCategoryRegistry;
 import dev.chaevsfe.createreiviewer.api.client.ViewerLayouts;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -78,6 +81,7 @@ public final class CDGViewerClientPlugin implements CreateViewerClientPlugin {
         registry.add(category(CDGViewerCategories.WIRE_CUTTING)
             .icon(CDGItems.WIRE_CUTTERS)
             .height(55)
+            .overhangTop(7)
             .workstations(CDGItems.WIRE_CUTTERS)
             .layout(CDGViewerClientPlugin::tool)
             .build());
@@ -160,8 +164,31 @@ public final class CDGViewerClientPlugin implements CreateViewerClientPlugin {
     private static void tool(ViewerRecipe recipe, ViewerCanvas canvas) {
         canvas.texture(AllGuiTextures.JEI_SHADOW, 61, 21);
         canvas.texture(AllGuiTextures.JEI_LONG_ARROW, 52, 32);
-        canvas.slot(81, 5, recipe.catalyst(0));
+        ItemStack tool = firstItem(recipe.catalyst(0));
+        if (!tool.isEmpty()) {
+            ItemStack processed = firstItem(recipe.input(0));
+            ItemStack rendered = tool.copy();
+            if (!processed.isEmpty()) {
+                rendered.set(CDGDataComponents.PROCESSING_ITEM, new SandPaperItemComponent(processed));
+            }
+            canvas.itemPip(72, 0, 32, () -> rendered);
+            canvas.tooltip(72, 0, 32, 32, tool.getHoverName());
+        }
         canvas.slot(27, 29, recipe.input(0));
-        ViewerLayouts.outputGrid(canvas, recipe, 142, 29);
+        ViewerLayouts.outputGrid(canvas, recipe, 132, 29);
+    }
+
+    private static ItemStack firstItem(ViewerIngredient ingredient) {
+        if (ingredient instanceof ViewerIngredient.OfIngredient of) {
+            return of.ingredient().items().findFirst().map(ItemStack::new).orElse(ItemStack.EMPTY);
+        }
+        if (ingredient instanceof ViewerIngredient.OfStacks stacks) {
+            for (ViewerStack stack : stacks.stacks()) {
+                if (stack instanceof ViewerStack.OfItem item && !item.stack().isEmpty()) {
+                    return item.stack();
+                }
+            }
+        }
+        return ItemStack.EMPTY;
     }
 }
