@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.content.diesel_engine.huge;
 
+import com.mojang.serialization.Codec;
 import com.zurrtum.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.zurrtum.create.catnip.data.Couple;
 import com.zurrtum.create.catnip.data.Pair;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.jesz.createdieselgenerators.content.diesel_engine.huge.HugeDieselEngineBlock.FACING;
@@ -120,7 +122,8 @@ public class PoweredEngineShaftBlockEntity extends GeneratingKineticBlockEntity 
             engineTag.store("Pos", BlockPos.CODEC, engine.getFirst());
         }
         tag.putFloat("GeneratedSpeed", speed);
-        tag.store("LastKnownPos", BlockPos.CODEC, lastKnownPos);
+        if (lastKnownPos != null)
+            tag.store("LastKnownPos", BlockPos.CODEC, lastKnownPos);
     }
 
     @Override
@@ -130,16 +133,22 @@ public class PoweredEngineShaftBlockEntity extends GeneratingKineticBlockEntity 
 
         List<Pair<BlockPos, Couple<Float>>> newEngines = new ArrayList<>();
         for (ValueInput engineTag : tag.childrenListOrEmpty("Engines")) {
-            BlockPos enginePos = engineTag.read("Pos", BlockPos.CODEC).orElse(null);
-            if (enginePos == null)
+            Optional<BlockPos> enginePos = readBlockPos(engineTag, "Pos");
+            if (enginePos.isEmpty())
                 continue;
-            newEngines.add(Pair.of(enginePos,
+            newEngines.add(Pair.of(enginePos.get(),
                     Couple.create(engineTag.getFloatOr("Capacity", 0f), engineTag.getFloatOr("Speed", 0f))));
         }
         engines = newEngines;
 
         speed = tag.getFloatOr("GeneratedSpeed", 0f);
-        lastKnownPos = tag.read("LastKnownPos", BlockPos.CODEC).orElse(null);
+        lastKnownPos = readBlockPos(tag, "LastKnownPos").orElse(worldPosition);
+    }
+
+    private static Optional<BlockPos> readBlockPos(ValueInput tag, String key) {
+        return tag.read(key, Codec.PASSTHROUGH).flatMap(pos -> BlockPos.CODEC.parse(pos).result()
+                .or(() -> pos.get("X").asNumber().result()
+                        .map(x -> new BlockPos(x.intValue(), pos.get("Y").asInt(0), pos.get("Z").asInt(0)))));
     }
 
     @Override
