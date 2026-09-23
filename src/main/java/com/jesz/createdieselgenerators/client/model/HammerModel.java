@@ -54,6 +54,7 @@ public class HammerModel implements ItemModel {
         float time = ((AnimationTickHolder.getTicks() + AnimationTickHolder.getPartialTicks()) % 10) / 10 - 0.5f;
         float swing = Math.abs(time * time * time);
         ItemStack processing = stack.get(CDGDataComponents.PROCESSING_ITEM).item();
+        state.appendModelIdentityElement(processing.getItem());
 
         Matrix4f toolTransform = new Matrix4f();
         Matrix4f itemTransform = new Matrix4f();

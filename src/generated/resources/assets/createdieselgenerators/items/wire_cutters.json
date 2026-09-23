@@ -1,5 +1,6 @@
 {
   "model": {
     "type": "createdieselgenerators:model/wire_cutters"
-  }
+  },
+  "oversized_in_gui": true
 }
