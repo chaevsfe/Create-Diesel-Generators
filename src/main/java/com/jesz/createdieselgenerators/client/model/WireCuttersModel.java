@@ -63,6 +63,7 @@ public class WireCuttersModel implements ItemModel {
         layer.setLocalTransform(Local.centered(new Matrix4f().translate(0, 0, 0.1f).rotateY(Local.rad(32))));
 
         ItemStack processing = stack.get(CDGDataComponents.PROCESSING_ITEM).item();
+        state.appendModelIdentityElement(processing.getItem());
         Matrix4f itemTransform = new Matrix4f()
                 .translate(0.1f, 0.2f, 0)
                 .rotateZ(Local.rad((AnimationTickHolder.getTicks() + 5) / 10 * -30));

@@ -10,6 +10,11 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fc;
+import org.joml.Vector3f;
+import org.joml.Vector3fc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public final class Local {
@@ -32,6 +37,12 @@ public final class Local {
         resolver.updateForTopItem(sub, stack, context, level, owner, seed);
         if (sub.isEmpty())
             return;
-        state.newLayer().setupSpecialModel(SubItemRenderer.INSTANCE, new SubItemRenderer.Argument(sub, transform));
+        Matrix4f placed = new Matrix4f(transform).translate(0.5f, 0.5f, 0.5f);
+        ItemStackRenderState.LayerRenderState layer = state.newLayer();
+        layer.setupSpecialModel(SubItemRenderer.INSTANCE, new SubItemRenderer.Argument(sub, placed));
+        List<Vector3fc> points = new ArrayList<>();
+        sub.visitExtents(point -> points.add(placed.transformPosition(point, new Vector3f())));
+        Vector3fc[] extents = points.toArray(Vector3fc[]::new);
+        layer.setExtents(() -> extents);
     }
 }
