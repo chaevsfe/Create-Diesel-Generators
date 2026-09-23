@@ -7,6 +7,7 @@ import com.jesz.createdieselgenerators.compat.strut_your_stuff.StrutYourStuffCli
 import com.jesz.createdieselgenerators.client.behaviour.CDGTooltipBehaviours;
 import com.jesz.createdieselgenerators.client.gui.CDGScreens;
 import com.jesz.createdieselgenerators.client.gui.CDGTooltipComponents;
+import com.jesz.createdieselgenerators.client.gui.render.CDGGuiRenderers;
 import com.jesz.createdieselgenerators.client.render.CDGEntityRenders;
 import com.jesz.createdieselgenerators.client.render.CDGFluidModels;
 import com.jesz.createdieselgenerators.client.render.CDGModels;
@@ -38,6 +39,7 @@ public final class CDGClient {
         CDGFluidModels.register();
         CDGScreens.register();
         CDGTooltipComponents.register();
+        CDGGuiRenderers.register();
         CDGItemTooltips.register();
         CDGClientEvents.register();
         PonderIndex.addPlugin(new CDGPonderPlugin());

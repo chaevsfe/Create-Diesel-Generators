@@ -2,11 +2,11 @@ package com.jesz.createdieselgenerators.compat.viewer;
 
 import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.CDGItems;
+import com.jesz.createdieselgenerators.client.gui.render.CastingSpoutRenderState;
 import com.zurrtum.create.AllBlocks;
 import com.zurrtum.create.AllItems;
 import com.zurrtum.create.client.foundation.gui.AllGuiTextures;
 import com.zurrtum.create.client.foundation.gui.render.PressBasinRenderState;
-import com.zurrtum.create.client.foundation.gui.render.SpoutRenderState;
 import com.zurrtum.create.content.processing.recipe.HeatCondition;
 import dev.chaevsfe.createreiviewer.api.ViewerIngredient;
 import dev.chaevsfe.createreiviewer.api.ViewerRecipe;
@@ -56,7 +56,8 @@ public final class CDGViewerClientPlugin implements CreateViewerClientPlugin {
             .build());
         registry.add(category(CDGViewerCategories.CASTING)
             .icon(AllItems.SPOUT, CDGItems.MOLD)
-            .height(70)
+            .height(ViewerLayouts.BASIN_HEIGHT)
+            .overhangTop(ViewerLayouts.BASIN_OVERHANG_TOP)
             .workstations(AllItems.SPOUT, CDGItems.MOLD, AllItems.BASIN)
             .layout(CDGViewerClientPlugin::casting)
             .build());
@@ -114,16 +115,16 @@ public final class CDGViewerClientPlugin implements CreateViewerClientPlugin {
     }
 
     private static void casting(ViewerRecipe recipe, ViewerCanvas canvas) {
-        canvas.texture(AllGuiTextures.JEI_SHADOW, 62, 57);
-        canvas.texture(AllGuiTextures.JEI_DOWN_ARROW, 126, 29);
+        canvas.texture(AllGuiTextures.JEI_SHADOW, 81, 68);
+        canvas.texture(AllGuiTextures.JEI_DOWN_ARROW, 136, 32);
         ViewerIngredient fluidInput = recipe.input(0);
         ViewerStack.OfFluid fluid = ViewerLayouts.firstFluid(fluidInput);
         if (fluid != null) {
-            canvas.pip(75, 1, (pose, x, y) -> new SpoutRenderState(0, pose, fluid.fluid(), fluid.components(), x, y, 0));
+            canvas.pip(91, -5, (pose, x, y) -> new CastingSpoutRenderState(pose, fluid.fluid(), fluid.components(), x, y));
         }
-        canvas.slot(27, 13, recipe.catalyst(0));
-        canvas.slot(27, 51, fluidInput);
-        ViewerLayouts.outputGrid(canvas, recipe, 142, 51);
+        canvas.slot(36, 11, recipe.catalyst(0));
+        canvas.slot(36, 51, fluidInput);
+        ViewerLayouts.basinOutputs(canvas, recipe, 51);
     }
 
     private static int distillationTop(int outputs) {
