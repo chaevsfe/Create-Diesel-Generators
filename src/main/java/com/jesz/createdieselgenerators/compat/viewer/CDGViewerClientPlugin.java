@@ -4,7 +4,7 @@ import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.CDGItems;
 import com.jesz.createdieselgenerators.client.gui.render.BasinFermentingRenderState;
 import com.jesz.createdieselgenerators.client.gui.render.CastingSpoutRenderState;
-import com.zurrtum.create.AllBlocks;
+import com.jesz.createdieselgenerators.client.gui.render.DistillationTowerRenderState;
 import com.zurrtum.create.AllItems;
 import com.zurrtum.create.client.foundation.gui.AllGuiTextures;
 import com.zurrtum.create.client.foundation.gui.render.PressBasinRenderState;
@@ -22,9 +22,10 @@ import net.minecraft.resources.Identifier;
 import java.util.List;
 
 public final class CDGViewerClientPlugin implements CreateViewerClientPlugin {
-    private static final int TOWER_X = 93;
-    private static final int TOWER_BASE_Y = 140;
-    private static final int TOWER_STEP = 20;
+    private static final int TOWER_X = 88;
+    private static final int TOWER_BOTTOM_Y = 170;
+    private static final int TOWER_BASE_Y = 147;
+    private static final int TOWER_STEP = DistillationTowerRenderState.SCALE;
     private static final int TOWER_TOP_MARGIN = 6;
     private static final int OUTPUT_BASE_Y = 127;
     private static final int OUTPUT_STEP = 23;
@@ -137,13 +138,13 @@ public final class CDGViewerClientPlugin implements CreateViewerClientPlugin {
     private static void distillation(ViewerRecipe recipe, ViewerCanvas canvas) {
         HeatCondition heat = recipe.heat();
         List<ViewerIngredient> outputs = recipe.outputs();
-        int dy = distillationTop(outputs.size()) - MARGIN;
+        int dy = distillationTop(MAX_TIERS) - MARGIN;
 
         canvas.texture(AllGuiTextures.JEI_ARROW, 40, 150 - dy);
         ViewerLayouts.shadow(canvas, heat, 81, 163 - dy, 183 - dy);
-        for (int i = 0; i <= outputs.size(); i++) {
-            canvas.blockPip(TOWER_X, TOWER_BASE_Y - TOWER_STEP * i - dy, AllBlocks.FLUID_TANK.defaultBlockState());
-        }
+        int tiers = outputs.size() + 1;
+        canvas.pip(TOWER_X, TOWER_BOTTOM_Y - dy - DistillationTowerRenderState.height(tiers),
+            (pose, x, y) -> new DistillationTowerRenderState(pose, tiers, x, y));
         ViewerLayouts.blazeBurner(canvas, heat, 91, 164 - dy);
         ViewerLayouts.heatBar(canvas, heat, 4, 170 - dy);
 

@@ -12,5 +12,6 @@ public final class CDGGuiRenderers {
     public static void register() {
         PictureInPictureRendererRegistry.register(context -> new BasinFermentingRenderer());
         PictureInPictureRendererRegistry.register(context -> new CastingSpoutRenderer());
+        PictureInPictureRendererRegistry.register(context -> new DistillationTowerRenderer());
     }
 }
