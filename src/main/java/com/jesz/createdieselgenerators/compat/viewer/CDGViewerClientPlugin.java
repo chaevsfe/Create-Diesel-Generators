@@ -2,6 +2,7 @@ package com.jesz.createdieselgenerators.compat.viewer;
 
 import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.CDGItems;
+import com.jesz.createdieselgenerators.client.gui.render.BasinFermentingRenderState;
 import com.jesz.createdieselgenerators.client.gui.render.CastingSpoutRenderState;
 import com.zurrtum.create.AllBlocks;
 import com.zurrtum.create.AllItems;
@@ -87,7 +88,7 @@ public final class CDGViewerClientPlugin implements CreateViewerClientPlugin {
 
     private static void basinFermenting(ViewerRecipe recipe, ViewerCanvas canvas) {
         ViewerLayouts.basinBackground(canvas, recipe.heat(), recipe.outputs().size());
-        canvas.blockPip(93, 42, CDGBlocks.BASIN_LID.getDefaultState());
+        canvas.pip(91, -5, BasinFermentingRenderState::new);
         ViewerLayouts.basinInputs(canvas, recipe);
         ViewerLayouts.basinOutputs(canvas, recipe, 51);
         ViewerLayouts.basinHeatSlots(canvas, recipe);
