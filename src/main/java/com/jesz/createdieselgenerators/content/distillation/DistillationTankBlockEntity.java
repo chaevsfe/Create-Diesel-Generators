@@ -828,6 +828,10 @@ public class DistillationTankBlockEntity extends SmartBlockEntity implements IMu
         be.updateTemperature();
     }
 
-
-
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        level.removeBlockEntity(pos);
+        ConnectivityHandler.splitMulti(this);
+    }
 }

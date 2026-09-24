@@ -4,7 +4,6 @@ import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGItems;
 import com.zurrtum.create.AllBlocks;
 import com.zurrtum.create.AllSoundEvents;
-import com.zurrtum.create.api.connectivity.ConnectivityHandler;
 import com.zurrtum.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.zurrtum.create.content.equipment.wrench.IWrenchable;
 import com.zurrtum.create.content.fluids.tank.FluidTankBlock;
@@ -45,7 +44,6 @@ import static com.jesz.createdieselgenerators.CDGItems.DISTILLATION_CONTROLLER;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.redstone.Orientation;
-import net.minecraft.server.level.ServerLevel;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import net.minecraft.world.entity.EntityTypes;
@@ -137,15 +135,6 @@ public class DistillationTankBlock extends Block implements IBE<DistillationTank
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
         withBlockEntityDo(context.getLevel(), context.getClickedPos(), DistillationTankBlockEntity::toggleWindows);
         return InteractionResult.SUCCESS;
-    }
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean movedByPiston) {
-        if (!state.hasBlockEntity())
-            return;
-        if (!(world.getBlockEntity(pos) instanceof DistillationTankBlockEntity tankBE))
-            return;
-        world.removeBlockEntity(pos);
-        ConnectivityHandler.splitMulti(tankBE);
     }
 
     @Override

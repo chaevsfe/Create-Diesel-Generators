@@ -369,4 +369,11 @@ public class OilBarrelBlockEntity extends SmartBlockEntity implements IMultiBloc
         return tankInventory.getFluid()
                 .copy();
     }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        level.removeBlockEntity(pos);
+        ConnectivityHandler.splitMulti(this);
+    }
 }
