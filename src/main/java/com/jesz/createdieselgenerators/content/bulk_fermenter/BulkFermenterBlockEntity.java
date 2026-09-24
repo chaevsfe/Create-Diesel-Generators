@@ -205,7 +205,7 @@ public class BulkFermenterBlockEntity extends SmartBlockEntity implements IMulti
 
     private void refreshRecipe() {
         List<BulkFermentingRecipe> matching = getMatchingRecipes();
-        if (!matching.contains(currentRecipe))
+        if (currentRecipe == null || !matching.contains(currentRecipe))
             processingTime = -1;
         if (processingTime == -1 && !matching.isEmpty()) {
             currentRecipe = matching.getFirst();
