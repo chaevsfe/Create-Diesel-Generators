@@ -4,7 +4,6 @@ import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.content.diesel_engine.EngineUpgrades;
-import com.zurrtum.create.api.connectivity.ConnectivityHandler;
 import com.zurrtum.create.api.schematic.requirement.SpecialBlockItemRequirement;
 import com.zurrtum.create.content.equipment.wrench.IWrenchable;
 import com.zurrtum.create.content.kinetics.base.HorizontalKineticBlock;
@@ -52,7 +51,6 @@ import static com.jesz.createdieselgenerators.content.diesel_engine.normal.Diese
 import static net.minecraft.core.Direction.NORTH;
 import static net.minecraft.core.Direction.SOUTH;
 import net.minecraft.world.level.redstone.Orientation;
-import net.minecraft.server.level.ServerLevel;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import net.minecraft.world.level.LevelAccessor;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
@@ -217,21 +215,6 @@ public class ModularDieselEngineBlock extends HorizontalKineticBlock implements 
             return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection());
         else
             return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
-    }
-
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
-        if (!movedByPiston)
-            withBlockEntityDo(level, pos, be -> {
-                if (be.upgrade != EngineUpgrades.EMPTY)
-                    popResource(level, pos, be.upgrade.getItem());
-            });
-
-        if (state.hasBlockEntity() && level.getBlockEntity(pos) instanceof ModularDieselEngineBlockEntity be) {
-            level.removeBlockEntity(pos);
-            ConnectivityHandler.splitMulti(be);
-        }
-        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
     }
 
     @Override

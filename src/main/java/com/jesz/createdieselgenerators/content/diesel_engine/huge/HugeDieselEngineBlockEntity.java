@@ -49,6 +49,7 @@ import static com.jesz.createdieselgenerators.content.diesel_engine.huge.HugeDie
 import static net.minecraft.ChatFormatting.GOLD;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.jesz.createdieselgenerators.CDGFluids;
+import net.minecraft.world.level.block.Block;
 
 public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IEngine {
     ServerScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
@@ -287,4 +288,11 @@ public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHa
 
     public void setAnalogSignal(int newSignal) { analogSignal = newSignal; }
     public void setSignalChanged(boolean newSignal) { signalChanged = newSignal; }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        if (upgrade != EngineUpgrades.EMPTY)
+            Block.popResource(level, pos, upgrade.getItem());
+    }
 }

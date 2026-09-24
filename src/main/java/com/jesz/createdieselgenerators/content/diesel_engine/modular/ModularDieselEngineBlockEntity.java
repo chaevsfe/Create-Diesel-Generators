@@ -428,5 +428,13 @@ public class ModularDieselEngineBlockEntity extends GeneratingKineticBlockEntity
     @Override public void setCachedFuelCapacity(float c) { cachedFuelCapacity = c; }
     @Override public float getCachedBurnRate() { return cachedBurnRate; }
     @Override public void setCachedBurnRate(float r) { cachedBurnRate = r; }
-}
 
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        if (upgrade != EngineUpgrades.EMPTY)
+            Block.popResource(level, pos, upgrade.getItem());
+        level.removeBlockEntity(pos);
+        ConnectivityHandler.splitMulti(this);
+    }
+}

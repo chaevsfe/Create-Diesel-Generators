@@ -36,6 +36,7 @@ import static com.jesz.createdieselgenerators.content.diesel_engine.normal.Diese
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.client.api.goggles.IHaveGoggleInformation;
 import com.jesz.createdieselgenerators.CDGFluids;
+import net.minecraft.world.level.block.Block;
 
 public class DieselEngineBlockEntity extends GeneratingKineticBlockEntity implements IHaveGoggleInformation, IEngine {
     ServerScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
@@ -195,4 +196,11 @@ public class DieselEngineBlockEntity extends GeneratingKineticBlockEntity implem
     @Override public void setCachedFuelCapacity(float c) { cachedFuelCapacity = c; }
     @Override public float getCachedBurnRate() { return cachedBurnRate; }
     @Override public void setCachedBurnRate(float r) { cachedBurnRate = r; }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        if (upgrade != EngineUpgrades.EMPTY)
+            Block.popResource(level, pos, upgrade.getItem());
+    }
 }

@@ -217,18 +217,11 @@ public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngine
     @Override
     public void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
         if (!movedByPiston) {
-            withBlockEntityDo(level, pos, be -> {
-                if (be.upgrade != EngineUpgrades.EMPTY)
-                    popResource(level, pos, be.upgrade.getItem());
-            });
             BlockPos shaftPos = pos.relative(state.getValue(FACING), 2);
             BlockState shaftState = level.getBlockState(shaftPos);
             if (CDGBlocks.POWERED_ENGINE_SHAFT.has(shaftState))
                 level.scheduleTick(shaftPos, shaftState.getBlock(), 1);
         }
-
-        if (state.hasBlockEntity())
-            level.removeBlockEntity(pos);
     }
 
     @Override
