@@ -134,6 +134,8 @@ public class BulkFermenterBlockEntity extends SmartBlockEntity implements IMulti
                             SoundSource.BLOCKS, .15f, .75f);
 
                 if (currentRecipe == null) {
+                    if (itemHandler == null)
+                        initCapability();
                     List<BulkFermentingRecipe> matching = getMatchingRecipes();
                     if (matching.isEmpty())
                         processingTime = -1;
