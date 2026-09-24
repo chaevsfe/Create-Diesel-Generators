@@ -25,7 +25,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.level.redstone.Orientation;
-import net.minecraft.server.level.ServerLevel;
 import com.zurrtum.create.infrastructure.fluids.FluidInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import net.minecraft.world.level.LevelAccessor;
@@ -60,13 +59,6 @@ public class ChemicalTurretBlock extends KineticBlock implements IBE<ChemicalTur
         if(blockEntity instanceof ChemicalTurretBlockEntity be)
             be.redstoneSignal = level.getBestNeighborSignal(pos);
         super.onPlace(state, level, pos, oldState, isMoving);
-    }
-
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
-        if (!movedByPiston && level.getBlockEntity(pos) instanceof ChemicalTurretBlockEntity be && be.lighterUpgrade)
-            Block.popResource(level, pos, CDGItems.LIGHTER.asStack());
-        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
     }
 
     @Override

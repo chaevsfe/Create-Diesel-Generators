@@ -28,6 +28,8 @@ import java.util.List;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.client.api.goggles.IHaveGoggleInformation;
 import com.jesz.createdieselgenerators.CDGFluids;
+import net.minecraft.world.level.block.Block;
+import com.jesz.createdieselgenerators.CDGItems;
 
 public class ChemicalTurretBlockEntity extends TurretBlockEntity implements IHaveGoggleInformation {
 
@@ -156,4 +158,10 @@ public class ChemicalTurretBlockEntity extends TurretBlockEntity implements IHav
         }
     }
 
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        if (lighterUpgrade)
+            Block.popResource(level, pos, CDGItems.LIGHTER.asStack());
+    }
 }
