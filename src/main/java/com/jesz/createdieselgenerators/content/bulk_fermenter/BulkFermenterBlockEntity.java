@@ -701,4 +701,12 @@ public class BulkFermenterBlockEntity extends SmartBlockEntity implements IMulti
             }
         }
     }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        super.preRemoveSideEffects(pos, state);
+        Containers.dropContents(level, pos, inventory);
+        level.removeBlockEntity(pos);
+        ConnectivityHandler.splitMulti(this);
+    }
 }

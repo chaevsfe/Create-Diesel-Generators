@@ -1,7 +1,6 @@
 package com.jesz.createdieselgenerators.content.bulk_fermenter;
 
 import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
-import com.zurrtum.create.api.connectivity.ConnectivityHandler;
 import com.zurrtum.create.content.equipment.wrench.IWrenchable;
 import com.zurrtum.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
@@ -22,8 +21,6 @@ import com.zurrtum.create.infrastructure.fluids.FluidInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.util.RandomSource;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Containers;
 import net.minecraft.world.entity.EntityTypes;
 
 public class BulkFermenterBlock extends Block implements IBE<BulkFermenterBlockEntity>, IWrenchable,
@@ -61,16 +58,6 @@ public class BulkFermenterBlock extends Block implements IBE<BulkFermenterBlockE
             return;
         withBlockEntityDo(world, pos, BulkFermenterBlockEntity::updateConnectivity);
         withBlockEntityDo(world, pos, BulkFermenterBlockEntity::updateHeat);
-    }
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean movedByPiston) {
-        if (!state.hasBlockEntity())
-            return;
-        if (!(world.getBlockEntity(pos) instanceof BulkFermenterBlockEntity tankBE))
-            return;
-        Containers.dropContents(world, pos, tankBE.inventory);
-        world.removeBlockEntity(pos);
-        ConnectivityHandler.splitMulti(tankBE);
     }
     @Override
     public Class<BulkFermenterBlockEntity> getBlockEntityClass() {
