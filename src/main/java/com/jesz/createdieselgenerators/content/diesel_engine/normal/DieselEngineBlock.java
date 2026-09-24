@@ -53,7 +53,6 @@ import static net.minecraft.core.Direction.SOUTH;
 import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.redstone.Orientation;
-import net.minecraft.server.level.ServerLevel;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.AllFluidItemInventory;
@@ -258,15 +257,5 @@ public class DieselEngineBlock extends DirectionalKineticBlock implements Specia
                 list.add(upgradeItem);
         }
         return new ItemRequirement(ItemRequirement.ItemUseType.CONSUME, list);
-    }
-
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston) {
-        if (!movedByPiston)
-            withBlockEntityDo(level, pos, be -> {
-                if (be.upgrade != EngineUpgrades.EMPTY)
-                    popResource(level, pos, be.upgrade.getItem());
-            });
-        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
     }
 }
