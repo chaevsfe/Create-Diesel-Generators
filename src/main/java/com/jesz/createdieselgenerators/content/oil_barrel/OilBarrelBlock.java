@@ -30,7 +30,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.Locale;
-import net.minecraft.server.level.ServerLevel;
 import com.zurrtum.create.infrastructure.fluids.FluidInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import net.minecraft.world.level.LevelAccessor;
@@ -76,15 +75,6 @@ public class OilBarrelBlock extends Block implements IBE<OilBarrelBlockEntity>, 
         builder.add(OIL_BARREL_COLOR, AXIS);
     }
 
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean movedByPiston) {
-        if (!state.hasBlockEntity())
-            return;
-        if (!(world.getBlockEntity(pos) instanceof OilBarrelBlockEntity tankBE))
-            return;
-        world.removeBlockEntity(pos);
-        ConnectivityHandler.splitMulti(tankBE);
-    }
 
     @Override
     public InteractionResult onWrenched(BlockState state, UseOnContext context) {
