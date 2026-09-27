@@ -28,7 +28,7 @@ repositories {
         dirs("libs", "../../create-rei/CreateReiViewer-Fly/build/libs", "../../create-struts/StrutYourStuff-Fly/build/libs")
     }
 }
-val recipeViewer = ":CreateReiViewer:${property("createreiviewer_version")}+fabric-mc${property("minecraft_version")}"
+val recipeViewer = ":CreateReiViewer:${property("createreiviewer_version")}"
 val struts = ":StrutYourStuff:${property("struts_version")}+fabric-mc${property("minecraft_version")}"
 
 loom {
