@@ -74,7 +74,7 @@ public abstract class BasinRendererMixin {
         }
 
         holder.createdieselgenerators$setMoldLayout(new MoldBasinLayout(entries));
-        state.ingredients = null;
+        state.ingredients = new BasinRenderer.IngredientRenderData[0];
         ci.cancel();
     }
 
