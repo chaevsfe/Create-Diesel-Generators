@@ -10,6 +10,7 @@ import com.zurrtum.create.client.flywheel.lib.instance.TransformedInstance;
 import com.zurrtum.create.client.flywheel.lib.model.Models;
 import com.zurrtum.create.client.flywheel.lib.visual.AbstractBlockEntityVisual;
 import com.zurrtum.create.client.flywheel.lib.visual.SimpleDynamicVisual;
+import com.zurrtum.create.client.foundation.virtualWorld.VirtualRenderWorld;
 import com.zurrtum.create.catnip.math.AngleHelper;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -37,7 +38,7 @@ public class HugeDieselEngineInstance extends AbstractBlockEntityVisual<HugeDies
 
     @Override
     public void beginFrame(DynamicVisual.Context ctx) {
-        PoweredEngineShaftBlockEntity shaft = blockEntity.getCachedShaft();
+        PoweredEngineShaftBlockEntity shaft = blockEntity.getLevel() instanceof VirtualRenderWorld ? blockEntity.getShaft() : blockEntity.getCachedShaft();
         Float angle = blockEntity.getTargetAngle(shaft);
         BlockState state = blockEntity.getBlockState();
         Direction facing = state.getValue(FACING);
