@@ -169,6 +169,11 @@ public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHa
         }
         return shaft;
     }
+
+    public PoweredEngineShaftBlockEntity getCachedShaft() {
+        PoweredEngineShaftBlockEntity shaft = target.get();
+        return shaft == null || shaft.isRemoved() ? null : shaft;
+    }
     
     @Override
     public void addBehaviours(List<BlockEntityBehaviour<?>> behaviours) {
@@ -226,13 +231,18 @@ public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHa
     }
 
     public Float getTargetAngle() {
+        if (!CDGBlocks.HUGE_DIESEL_ENGINE.has(getBlockState()))
+            return null;
+        return getTargetAngle(getShaft());
+    }
+
+    public Float getTargetAngle(PoweredEngineShaftBlockEntity shaft) {
         float angle;
         BlockState state = getBlockState();
         if (!CDGBlocks.HUGE_DIESEL_ENGINE.has(state))
             return null;
 
         Direction facing = state.getValue(FACING);
-        PoweredEngineShaftBlockEntity shaft = getShaft();
         Direction.Axis facingAxis = facing.getAxis();
         Direction.Axis axis;
 

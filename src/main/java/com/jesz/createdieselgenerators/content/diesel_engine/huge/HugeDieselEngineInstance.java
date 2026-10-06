@@ -16,7 +16,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
 import java.util.function.Consumer;
 
 import static com.jesz.createdieselgenerators.content.diesel_engine.huge.HugeDieselEngineBlock.FACING;
@@ -38,22 +37,12 @@ public class HugeDieselEngineInstance extends AbstractBlockEntityVisual<HugeDies
 
     @Override
     public void beginFrame(DynamicVisual.Context ctx) {
-        Float angle = blockEntity.getTargetAngle();
+        PoweredEngineShaftBlockEntity shaft = blockEntity.getCachedShaft();
+        Float angle = blockEntity.getTargetAngle(shaft);
         BlockState state = blockEntity.getBlockState();
         Direction facing = state.getValue(FACING);
         Direction.Axis facingAxis = facing.getAxis();
-        if (angle == null){
-            transformed(piston, facing, false)
-                    .translate(0, 0.53475, 0);
-            linkage.setZeroTransform().setChanged();
-            connector.setZeroTransform().setChanged();
-            piston.setChanged();
-            return;
-    }
-
-
-        PoweredEngineShaftBlockEntity shaft = blockEntity.getShaft();
-        if(shaft == null){
+        if (angle == null || shaft == null) {
             transformed(piston, facing, false)
                     .translate(0, 0.53475, 0);
             linkage.setZeroTransform().setChanged();
