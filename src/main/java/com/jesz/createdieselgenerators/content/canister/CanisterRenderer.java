@@ -39,7 +39,6 @@ public class CanisterRenderer extends SmartBlockEntityRenderer<CanisterBlockEnti
         super.submit(state, matrices, queue, cameraState);
         if (state.enchanted == null)
             return;
-        state.enchanted.submit(RenderTypes.cutoutMovingBlock(), matrices, queue);
         state.enchanted.submit(RenderTypes.itemCutoutGlint(TextureAtlas.LOCATION_BLOCKS), matrices, queue);
     }
 
