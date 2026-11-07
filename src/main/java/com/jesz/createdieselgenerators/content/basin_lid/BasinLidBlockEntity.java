@@ -30,6 +30,7 @@ public class BasinLidBlockEntity extends BasinOperatingBlockEntity {
     public int processingTime;
     public boolean running;
     public float progress;
+    private int processingDuration;
 
 
     public BasinLidBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
@@ -41,6 +42,7 @@ public class BasinLidBlockEntity extends BasinOperatingBlockEntity {
         super.write(compound, clientPacket);
 
         compound.putInt("ProcessingTime", this.processingTime);
+        compound.putInt("ProcessingDuration", this.processingDuration);
         compound.putBoolean("Running", this.running);
         compound.putBoolean("SteamInside", this.steamInside);
     }
@@ -50,6 +52,7 @@ public class BasinLidBlockEntity extends BasinOperatingBlockEntity {
         super.read(compound, clientPacket);
 
         this.processingTime = compound.getIntOr("ProcessingTime", 0);
+        this.processingDuration = compound.getIntOr("ProcessingDuration", 0);
         this.running = compound.getBooleanOr("Running", false);
         this.steamInside = compound.getBooleanOr("SteamInside", false);
     }
@@ -65,7 +68,9 @@ public class BasinLidBlockEntity extends BasinOperatingBlockEntity {
     @Override
     public void tick() {
         super.tick();
-        if (currentRecipe instanceof BasinFermentingRecipe fermenting)
+        if (level.isClientSide())
+            progress = running && processingDuration > 0 ? (float) Math.max(processingTime, 0) / processingDuration : 0;
+        else if (currentRecipe instanceof BasinFermentingRecipe fermenting)
             progress = (float) processingTime / fermenting.getProcessingDuration();
         else {
             if (processingTime != -1) {
@@ -105,7 +110,7 @@ public class BasinLidBlockEntity extends BasinOperatingBlockEntity {
     @Override
     protected boolean updateBasin() {
         if (this.running) return true;
-        if (this.level == null) return true;
+        if (this.level == null || this.level.isClientSide()) return true;
         if (this.getBasin().filter(BasinBlockEntity::canContinueProcessing).isEmpty()) return true;
 
         Recipe<?> recipe = this.getMatchingRecipes();
@@ -122,6 +127,7 @@ public class BasinLidBlockEntity extends BasinOperatingBlockEntity {
         super.startProcessingBasin();
         this.running = true;
         this.processingTime = this.currentRecipe instanceof BasinFermentingRecipe processed ? processed.getProcessingDuration() : 20;
+        this.processingDuration = this.processingTime;
     }
 
     @Override
