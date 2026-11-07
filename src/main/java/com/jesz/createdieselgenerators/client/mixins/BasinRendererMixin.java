@@ -90,12 +90,12 @@ public abstract class BasinRendererMixin {
             ms.pushPose();
             if (entry.mold()) {
                 ms.translate(0.5, 0.7, 0.5);
-                ms.mulPose(Axis.XP.rotationDegrees(90));
+                ms.rotateDegrees(Axis.XP, 90);
                 ms.scale(1.75f, 1.75f, 1.75f);
                 ms.translate(0, -0.125, 0);
             } else {
                 ms.translate(0.5, 0.74, 0.5);
-                ms.mulPose(Axis.XP.rotationDegrees(90));
+                ms.rotateDegrees(Axis.XP, 90);
                 ms.scale(0.5f, 0.5f, 0.5f);
                 ms.translate(entry.offset());
             }

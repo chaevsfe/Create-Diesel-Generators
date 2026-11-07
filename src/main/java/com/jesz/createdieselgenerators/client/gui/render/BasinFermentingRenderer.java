@@ -19,8 +19,8 @@ public class BasinFermentingRenderer extends GuiBlockRenderer<BasinFermentingRen
     @Override
     protected void renderToTexture(BasinFermentingRenderState state, PoseStack matrices, SubmitNodeCollector queue) {
         matrices.scale(1, 1, -1);
-        matrices.mulPose(Axis.XP.rotationDegrees(-15.5f));
-        matrices.mulPose(Axis.YP.rotationDegrees(22.5f));
+        matrices.rotateDegrees(Axis.XP, -15.5f);
+        matrices.rotateDegrees(Axis.YP, 22.5f);
         matrices.translate(-0.5f, -1.8f, -0.5f);
         matrices.scale(1, -1, 1);
 

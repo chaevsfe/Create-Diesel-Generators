@@ -18,8 +18,8 @@ public class DistillationTowerRenderer extends GuiBlockRenderer<DistillationTowe
     @Override
     protected void renderToTexture(DistillationTowerRenderState state, PoseStack matrices, SubmitNodeCollector queue) {
         matrices.scale(1, 1, -1);
-        matrices.mulPose(Axis.XP.rotationDegrees(-15.5f));
-        matrices.mulPose(Axis.YP.rotationDegrees(22.5f));
+        matrices.rotateDegrees(Axis.XP, -15.5f);
+        matrices.rotateDegrees(Axis.YP, 22.5f);
         matrices.translate(-0.5f, -0.2f, -0.5f);
         matrices.scale(1, -1, 1);
 
