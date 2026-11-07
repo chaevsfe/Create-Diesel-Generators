@@ -9,12 +9,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.levelgen.PositionalRandomFactory;
-import net.minecraft.world.level.levelgen.synth.NoiseStack;
-import net.minecraft.world.level.levelgen.synth.PerlinNoise;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
 
@@ -104,20 +100,11 @@ public class OilChunksSavedData extends SavedData {
     }
 
     private static long noiseSeed;
-    private static NoiseStack cachedNoise;
+    private static OilNoise cachedNoise;
 
-    private static NoiseStack noiseFor(long seed) {
+    private static OilNoise noiseFor(long seed) {
         if (cachedNoise == null || noiseSeed != seed) {
-            PositionalRandomFactory positional = RandomSource.create(seed).forkPositional();
-            NoiseStack.Builder builder = NoiseStack.builder();
-            double frequency = 0.25d;
-            double amplitude = 8d / 15d;
-            for (int octave = -2; octave <= 1; octave++) {
-                builder.add(new PerlinNoise(positional.fromHashOf("octave_" + octave)), frequency, (float) amplitude);
-                frequency *= 2d;
-                amplitude /= 2d;
-            }
-            cachedNoise = builder.build();
+            cachedNoise = new OilNoise(seed);
             noiseSeed = seed;
         }
         return cachedNoise;
@@ -128,8 +115,8 @@ public class OilChunksSavedData extends SavedData {
         List<Holder<Biome>> biomes = getBiomesInChunk(level, chunk);
 
         double scale = CDGConfig.server().OIL_CHUNK_SCALE.get();
-        NoiseStack noise = noiseFor(seed);
-        float amount = (float) (noise.get(chunk.x() * scale, 0, chunk.z() * scale) + 1) / 1.6f;
+        OilNoise noise = noiseFor(seed);
+        float amount = (float) (noise.getValue(chunk.x() * scale, 0, chunk.z() * scale) + 1) / 1.6f;
 
         boolean isHighInOil = false;
         boolean isDenied = false;
