@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.item.ModelRenderProperties;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.ItemQuads;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.entity.ItemOwner;
@@ -39,14 +40,16 @@ public class LighterItemModel implements ItemModel {
 
     private static final Map<String, String> SKIN_IDS = new HashMap<>();
 
-    private final Map<String, List<BakedQuad>> quads;
+    private final Map<String, ItemQuads> quads = new HashMap<>();
     private final Map<String, Supplier<Vector3fc[]>> extents = new HashMap<>();
     private final ModelRenderProperties settings;
 
     public LighterItemModel(Map<String, List<BakedQuad>> quads, ModelRenderProperties settings) {
-        this.quads = quads;
         this.settings = settings;
-        quads.forEach((key, list) -> extents.put(key, ItemModelParts.extents(list)));
+        quads.forEach((key, list) -> {
+            this.quads.put(key, ItemQuads.split(list));
+            extents.put(key, ItemModelParts.extents(list));
+        });
     }
 
     public static Map<String, String> skinIds() {

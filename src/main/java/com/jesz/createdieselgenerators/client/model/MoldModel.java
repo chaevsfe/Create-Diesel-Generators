@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.item.ModelRenderProperties;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.ItemQuads;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -31,25 +32,27 @@ public class MoldModel implements ItemModel {
     public static final Identifier ID = CreateDieselGenerators.rl("model/mold");
     public static final Identifier ITEM_ID = CreateDieselGenerators.rl("item/mold");
 
-    private final List<BakedQuad> emptyQuads;
+    private final ItemQuads emptyQuads;
     private final ModelRenderProperties settings;
     private final Supplier<Vector3fc[]> emptyExtents;
-    private final Map<Identifier, List<BakedQuad>> typeQuads;
+    private final Map<Identifier, ItemQuads> typeQuads = new HashMap<>();
     private final Map<Identifier, Supplier<Vector3fc[]>> typeExtents = new HashMap<>();
 
     public MoldModel(List<BakedQuad> emptyQuads, ModelRenderProperties settings, Map<Identifier, List<BakedQuad>> typeQuads) {
-        this.emptyQuads = emptyQuads;
+        this.emptyQuads = ItemQuads.split(emptyQuads);
         this.settings = settings;
         this.emptyExtents = ItemModelParts.extents(emptyQuads);
-        this.typeQuads = typeQuads;
-        typeQuads.forEach((id, quads) -> typeExtents.put(id, ItemModelParts.extents(quads)));
+        typeQuads.forEach((id, quads) -> {
+            this.typeQuads.put(id, ItemQuads.split(quads));
+            typeExtents.put(id, ItemModelParts.extents(quads));
+        });
     }
 
     @Override
     public void update(ItemStackRenderState state, ItemStack stack, ItemModelResolver resolver, ItemDisplayContext transformType, ClientLevel level, ItemOwner owner, int seed) {
         state.appendModelIdentityElement(this);
         MoldType type = MoldItem.getMold(stack);
-        List<BakedQuad> quads = emptyQuads;
+        ItemQuads quads = emptyQuads;
         Supplier<Vector3fc[]> extents = emptyExtents;
         if (type != null && typeQuads.containsKey(type.getId())) {
             quads = typeQuads.get(type.getId());

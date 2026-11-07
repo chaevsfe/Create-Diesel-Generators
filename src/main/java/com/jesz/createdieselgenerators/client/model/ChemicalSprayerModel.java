@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.item.ModelRenderProperties;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.ItemQuads;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -32,17 +33,17 @@ public class ChemicalSprayerModel implements ItemModel {
     public static final Identifier LIGHTER_ID = CreateDieselGenerators.rl("model/chemical_sprayer_lighter");
     public static final Identifier COG_ID = CreateDieselGenerators.rl("item/chemical_sprayer/cog");
 
-    private final List<BakedQuad> bodyQuads;
+    private final ItemQuads bodyQuads;
     private final ModelRenderProperties settings;
     private final Supplier<Vector3fc[]> bodyExtents;
-    private final List<BakedQuad> cogQuads;
+    private final ItemQuads cogQuads;
     private final Supplier<Vector3fc[]> cogExtents;
 
     public ChemicalSprayerModel(List<BakedQuad> bodyQuads, ModelRenderProperties settings, List<BakedQuad> cogQuads) {
-        this.bodyQuads = bodyQuads;
+        this.bodyQuads = ItemQuads.split(bodyQuads);
         this.settings = settings;
         this.bodyExtents = ItemModelParts.extents(bodyQuads);
-        this.cogQuads = cogQuads;
+        this.cogQuads = ItemQuads.split(cogQuads);
         this.cogExtents = ItemModelParts.extents(cogQuads);
     }
 

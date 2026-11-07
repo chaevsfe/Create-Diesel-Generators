@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.item.ModelRenderProperties;
 import net.minecraft.client.resources.model.ResolvableModel;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.resources.model.geometry.ItemQuads;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ItemOwner;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -32,17 +33,17 @@ public class WireCuttersModel implements ItemModel {
     public static final Identifier CLOSED_ID = CreateDieselGenerators.rl("item/wire_cutters");
     public static final Identifier OPEN_ID = CreateDieselGenerators.rl("item/wire_cutters_cut");
 
-    private final List<BakedQuad> closedQuads;
+    private final ItemQuads closedQuads;
     private final ModelRenderProperties settings;
     private final Supplier<Vector3fc[]> closedExtents;
-    private final List<BakedQuad> openQuads;
+    private final ItemQuads openQuads;
     private final Supplier<Vector3fc[]> openExtents;
 
     public WireCuttersModel(List<BakedQuad> closedQuads, ModelRenderProperties settings, List<BakedQuad> openQuads) {
-        this.closedQuads = closedQuads;
+        this.closedQuads = ItemQuads.split(closedQuads);
         this.settings = settings;
         this.closedExtents = ItemModelParts.extents(closedQuads);
-        this.openQuads = openQuads;
+        this.openQuads = ItemQuads.split(openQuads);
         this.openExtents = ItemModelParts.extents(openQuads);
     }
 
