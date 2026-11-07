@@ -10,7 +10,6 @@ import com.zurrtum.create.content.kinetics.base.DirectionalKineticBlock;
 import com.zurrtum.create.content.schematics.requirement.ItemRequirement;
 import com.zurrtum.create.foundation.block.IBE;
 import com.zurrtum.create.foundation.block.ProperWaterloggedBlock;
-import com.zurrtum.create.foundation.block.RedStoneConnectBlock;
 import com.zurrtum.create.foundation.blockEntity.SmartBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -59,7 +58,7 @@ import com.zurrtum.create.AllFluidItemInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidItemInventory;
 import net.minecraft.world.entity.EntityTypes;
 
-public class DieselEngineBlock extends DirectionalKineticBlock implements SpecialBlockItemRequirement, IBE<DieselEngineBlockEntity>, ProperWaterloggedBlock, FluidInventoryProvider<DieselEngineBlockEntity>, RedStoneConnectBlock {
+public class DieselEngineBlock extends DirectionalKineticBlock implements SpecialBlockItemRequirement, IBE<DieselEngineBlockEntity>, ProperWaterloggedBlock, FluidInventoryProvider<DieselEngineBlockEntity> {
 
     @Override
     public FluidInventory getFluidInventory(LevelAccessor world, BlockPos pos, BlockState state, DieselEngineBlockEntity blockEntity, Direction side) {
@@ -89,7 +88,7 @@ public class DieselEngineBlock extends DirectionalKineticBlock implements Specia
     }
 
     @Override
-    public boolean canConnectRedstone(BlockState state, Direction direction) {
+    protected boolean shouldRedstoneWireConnectTo(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction side) {
         return true;
     }
 

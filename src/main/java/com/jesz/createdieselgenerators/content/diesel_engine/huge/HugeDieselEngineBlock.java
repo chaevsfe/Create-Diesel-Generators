@@ -10,7 +10,6 @@ import com.zurrtum.create.content.kinetics.base.IRotate;
 import com.zurrtum.create.content.kinetics.simpleRelays.ShaftBlock;
 import com.zurrtum.create.content.kinetics.steamEngine.PoweredShaftBlock;
 import com.zurrtum.create.foundation.block.IBE;
-import com.zurrtum.create.foundation.block.RedStoneConnectBlock;
 import com.zurrtum.create.foundation.blockEntity.SmartBlockEntity;
 import com.zurrtum.create.foundation.utility.BlockHelper;
 import com.zurrtum.create.catnip.data.Iterate;
@@ -56,7 +55,7 @@ import com.zurrtum.create.AllFluidItemInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidItemInventory;
 import net.minecraft.world.entity.EntityTypes;
 
-public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngineBlockEntity>, IWrenchable, FluidInventoryProvider<HugeDieselEngineBlockEntity>, RedStoneConnectBlock {
+public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngineBlockEntity>, IWrenchable, FluidInventoryProvider<HugeDieselEngineBlockEntity> {
 
     @Override
     public FluidInventory getFluidInventory(LevelAccessor world, BlockPos pos, BlockState state, HugeDieselEngineBlockEntity blockEntity, Direction side) {
@@ -76,7 +75,7 @@ public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngine
     }
 
     @Override
-    public boolean canConnectRedstone(BlockState state, Direction direction) {
+    protected boolean shouldRedstoneWireConnectTo(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction side) {
         return true;
     }
 
