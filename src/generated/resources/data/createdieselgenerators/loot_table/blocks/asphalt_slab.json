@@ -6,23 +6,21 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
+          "modifier": [
             {
+              "type": "minecraft:set_count",
               "add": false,
-              "conditions": [
-                {
-                  "block": "createdieselgenerators:asphalt_slab",
-                  "condition": "minecraft:block_state_property",
-                  "properties": {
-                    "type": "double"
-                  }
+              "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "createdieselgenerators:asphalt_slab",
+                "state": {
+                  "type": "double"
                 }
-              ],
-              "count": 2.0,
-              "function": "minecraft:set_count"
+              },
+              "count": 2.0
             },
             {
-              "function": "minecraft:explosion_decay"
+              "type": "minecraft:explosion_decay"
             }
           ],
           "name": "createdieselgenerators:asphalt_slab"
