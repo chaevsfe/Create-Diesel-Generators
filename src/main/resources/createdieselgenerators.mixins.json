@@ -8,6 +8,7 @@
     "ContraptionMixin",
     "CopycatBlockMixin",
     "CreeperMixin",
+    "DataFixersMixin",
     "EntityMixin",
     "GenericItemEmptyingMixin",
     "ItemEntityMixin",
