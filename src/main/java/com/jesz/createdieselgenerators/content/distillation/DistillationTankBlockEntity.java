@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.content.distillation;
 
+import net.fabricmc.api.EnvironmentInterface;
 import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGRecipes;
 import com.jesz.createdieselgenerators.CreateDieselGenerators;
@@ -56,6 +57,8 @@ import com.jesz.createdieselgenerators.foundation.CDGInv;
 import net.minecraft.world.entity.EntityType;
 import com.jesz.createdieselgenerators.CDGFluids;
 
+@EnvironmentInterface(value = EnvType.CLIENT, itf = IHaveGoggleInformation.class)
+@EnvironmentInterface(value = EnvType.CLIENT, itf = IHaveHoveringInformation.class)
 public class DistillationTankBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation, IHaveHoveringInformation {
     private static final int MAX_SIZE = 3;
 
@@ -490,6 +493,7 @@ public class DistillationTankBlockEntity extends SmartBlockEntity implements IMu
             return super.createRenderBoundingBox();
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         DistillationTankBlockEntity controllerBE = getControllerBE();
@@ -779,6 +783,7 @@ public class DistillationTankBlockEntity extends SmartBlockEntity implements IMu
         return false;
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean addToTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         if (!isController()) {

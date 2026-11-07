@@ -60,7 +60,7 @@ public class CDGRegistrate extends Registrate {
 
     public CDGRegistrate setTooltipModifierFactory(Function<Item, TooltipModifier> factory) {
         this.tooltipModifierFactory = factory;
-        getAll(Registries.ITEM).forEach(entry -> registerTooltipModifier(entry.get()));
+        tooltipItems.forEach(item -> TooltipModifier.REGISTRY.register(item, factory.apply(item)));
         return this;
     }
 
@@ -70,7 +70,7 @@ public class CDGRegistrate extends Registrate {
 
     @Override
     public void registerTooltipModifier(Item item) {
-        if (tooltipModifierFactory == null || !tooltipItems.add(item))
+        if (!tooltipItems.add(item) || tooltipModifierFactory == null)
             return;
         TooltipModifier.REGISTRY.register(item, tooltipModifierFactory.apply(item));
     }

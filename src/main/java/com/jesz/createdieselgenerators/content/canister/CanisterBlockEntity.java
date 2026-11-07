@@ -1,5 +1,8 @@
 package com.jesz.createdieselgenerators.content.canister;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.api.EnvironmentInterface;
 import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.CDGDataComponents;
@@ -28,6 +31,7 @@ import com.jesz.createdieselgenerators.content.fluids.SimpleFluidContent;
 import com.jesz.createdieselgenerators.mixins.TankSegmentAccessor;
 import com.jesz.createdieselgenerators.CDGFluids;
 
+@EnvironmentInterface(value = EnvType.CLIENT, itf = IHaveGoggleInformation.class)
 public class CanisterBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation {
     CapacityEnchantedFluidTankBehaviour tank;
     BlockState state;
@@ -41,6 +45,7 @@ public class CanisterBlockEntity extends SmartBlockEntity implements IHaveGoggle
         this.state = state;
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         return containedFluidTooltip(tooltip, isPlayerSneaking, CDGInv.fluidsAt(level, worldPosition));

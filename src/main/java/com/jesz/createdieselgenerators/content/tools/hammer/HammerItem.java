@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import com.jesz.createdieselgenerators.CDGDataComponents;
 import com.jesz.createdieselgenerators.CDGRecipes;
 import com.zurrtum.create.infrastructure.component.SandPaperItemComponent;
-import com.zurrtum.create.client.catnip.animation.AnimationTickHolder;
+import com.jesz.createdieselgenerators.foundation.CDGAnimationTicks;
 import com.zurrtum.create.catnip.math.VecHelper;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -112,7 +112,7 @@ public class HammerItem extends Item {
 
     @Override
     public void onUseTick(Level level, LivingEntity entity, ItemStack stack, int tick) {
-        if (AnimationTickHolder.getTicks() % 10 == 0) {
+        if (CDGAnimationTicks.get() % 10 == 0) {
             level.playLocalSound(entity.xo, entity.yo, entity.zo, SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS, 0.3f, 1f, true);
 
             if (!stack.has(CDGDataComponents.PROCESSING_ITEM)) {

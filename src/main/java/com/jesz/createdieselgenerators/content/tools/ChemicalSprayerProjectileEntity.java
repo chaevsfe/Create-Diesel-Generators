@@ -1,5 +1,8 @@
 package com.jesz.createdieselgenerators.content.tools;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.core.particles.ParticleOptions;
 import com.jesz.createdieselgenerators.CDGEntityTypes;
 import com.jesz.createdieselgenerators.CDGRegistries;
 import com.jesz.createdieselgenerators.fuel_type.FuelType;
@@ -142,7 +145,7 @@ public class ChemicalSprayerProjectileEntity extends AbstractHurtingProjectile {
             cooling = getEntityData().get(DATA_COOLING);
             if (!stack.isEmpty() && !fire)
                 level().addParticle(
-                    FluidFX.getFluidParticle(stack),
+                    fluidParticle(stack),
                     position().x + getRandom().nextDouble() - 0.5,
                     position().y + 0.3,
                     position().z + getRandom().nextDouble() - 0.5,
@@ -218,5 +221,10 @@ public class ChemicalSprayerProjectileEntity extends AbstractHurtingProjectile {
     @Override
     public float getPickRadius() {
         return 0.0f;
+    }
+
+    @Environment(EnvType.CLIENT)
+    private static ParticleOptions fluidParticle(FluidStack stack) {
+        return FluidFX.getFluidParticle(stack);
     }
 }

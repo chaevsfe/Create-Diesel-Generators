@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.content.diesel_engine.huge;
 
+import net.fabricmc.api.EnvironmentInterface;
 import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.CDGConfig;
@@ -51,6 +52,7 @@ import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.jesz.createdieselgenerators.CDGFluids;
 import net.minecraft.world.level.block.Block;
 
+@EnvironmentInterface(value = EnvType.CLIENT, itf = IHaveGoggleInformation.class)
 public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHaveGoggleInformation, IEngine {
     ServerScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
     EngineUpgrades upgrade = EngineUpgrades.EMPTY;
@@ -194,6 +196,7 @@ public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHa
                 be.movementDirection.setValue(v);
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         if (overStressed) {
@@ -230,12 +233,14 @@ public class HugeDieselEngineBlockEntity extends SmartBlockEntity implements IHa
         return containedFluidTooltip(tooltip, isPlayerSneaking, tank.getCapability());
     }
 
+    @Environment(EnvType.CLIENT)
     public Float getTargetAngle() {
         if (!CDGBlocks.HUGE_DIESEL_ENGINE.has(getBlockState()))
             return null;
         return getTargetAngle(getShaft());
     }
 
+    @Environment(EnvType.CLIENT)
     public Float getTargetAngle(PoweredEngineShaftBlockEntity shaft) {
         float angle;
         BlockState state = getBlockState();
