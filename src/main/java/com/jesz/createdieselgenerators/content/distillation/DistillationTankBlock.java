@@ -47,6 +47,7 @@ import net.minecraft.world.level.redstone.Orientation;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.util.Prediction;
 
 public class DistillationTankBlock extends Block implements IBE<DistillationTankBlockEntity>, IWrenchable, SpecialBlockItemRequirement, FluidInventoryProvider<DistillationTankBlockEntity> {
 
@@ -99,7 +100,7 @@ public class DistillationTankBlock extends Block implements IBE<DistillationTank
                     CDGInv.fill(fTank, stackInTank, false);
             }
             if (!context.getPlayer().isCreative())
-                context.getPlayer().getInventory().placeItemBackInInventory(DISTILLATION_CONTROLLER.asStack(width*width));
+                context.getPlayer().getInventory().placeItemBackInInventory(DISTILLATION_CONTROLLER.asStack(width*width), Prediction.SERVER_ONLY);
         }
 
         return InteractionResult.SUCCESS;

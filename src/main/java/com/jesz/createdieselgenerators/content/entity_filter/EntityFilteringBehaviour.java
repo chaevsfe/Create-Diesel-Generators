@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import com.jesz.createdieselgenerators.foundation.CDGInv;
+import net.minecraft.util.Prediction;
 
 public class EntityFilteringBehaviour extends ServerFilteringBehaviour {
     public EntityFilteringBehaviour(SmartBlockEntity be) {
@@ -43,7 +44,7 @@ public class EntityFilteringBehaviour extends ServerFilteringBehaviour {
         if (getFilter().getItem() instanceof EntityFilterItem) {
             if (!player.isCreative() || !hasCopyOf(player, getFilter()))
                 player.getInventory()
-                        .placeItemBackInInventory(getFilter());
+                        .placeItemBackInInventory(getFilter(), Prediction.SERVER_ONLY);
         }
 
         if (toApply.getItem() instanceof EntityFilterItem)

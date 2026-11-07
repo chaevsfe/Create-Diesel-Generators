@@ -30,6 +30,7 @@ import com.zurrtum.create.infrastructure.fluids.FluidInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidInventoryProvider;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.util.Prediction;
 
 public class ChemicalTurretBlock extends KineticBlock implements IBE<ChemicalTurretBlockEntity>, ICogWheel, FluidInventoryProvider<ChemicalTurretBlockEntity> {
 
@@ -99,7 +100,7 @@ public class ChemicalTurretBlock extends KineticBlock implements IBE<ChemicalTur
                 if(!context.getLevel().isClientSide())
                     be.notifyUpdate();
                 if(!context.getPlayer().isCreative())
-                    context.getPlayer().getInventory().placeItemBackInInventory(CDGItems.LIGHTER.asStack());
+                    context.getPlayer().getInventory().placeItemBackInInventory(CDGItems.LIGHTER.asStack(), Prediction.SERVER_ONLY);
                 IWrenchable.playRotateSound(context.getLevel(), context.getClickedPos());
                 return InteractionResult.SUCCESS;
             }

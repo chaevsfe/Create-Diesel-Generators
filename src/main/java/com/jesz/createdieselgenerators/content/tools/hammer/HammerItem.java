@@ -34,6 +34,7 @@ import net.fabricmc.api.Environment;
 
 import java.util.Optional;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Prediction;
 
 public class HammerItem extends Item {
     Multimap<Attribute, AttributeModifier> toolAttributes;
@@ -99,11 +100,11 @@ public class HammerItem extends Item {
             stack.remove(CDGDataComponents.PROCESSING_ITEM);
 
             if (recipe.isEmpty()) {
-                player.getInventory().placeItemBackInInventory(processingItem);
+                player.getInventory().placeItemBackInInventory(processingItem, Prediction.SERVER_ONLY);
                 return stack;
             }
             for (ItemStack result : recipe.get().value().assemble(hammerInv, level.getRandom()))
-                player.getInventory().placeItemBackInInventory(result);
+                player.getInventory().placeItemBackInInventory(result, Prediction.SERVER_ONLY);
             if (level instanceof ServerLevel sl)
                 stack.hurtAndBreak(1, sl, (ServerPlayer) player, i -> {});
             return stack;
@@ -142,7 +143,7 @@ public class HammerItem extends Item {
                 return false;
 
             ItemStack processingItem = stack.get(CDGDataComponents.PROCESSING_ITEM).item();
-            player.getInventory().placeItemBackInInventory(processingItem);
+            player.getInventory().placeItemBackInInventory(processingItem, Prediction.SERVER_ONLY);
             stack.remove(CDGDataComponents.PROCESSING_ITEM);
         }
             return true;

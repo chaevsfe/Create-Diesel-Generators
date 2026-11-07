@@ -54,6 +54,7 @@ import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.AllFluidItemInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidItemInventory;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.util.Prediction;
 
 public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngineBlockEntity>, IWrenchable, FluidInventoryProvider<HugeDieselEngineBlockEntity> {
 
@@ -139,7 +140,7 @@ public class HugeDieselEngineBlock extends Block implements IBE<HugeDieselEngine
             if(be.upgrade != EngineUpgrades.EMPTY){
                 if(!context.getLevel().isClientSide()) {
                     if (!context.getPlayer().isCreative())
-                        context.getPlayer().getInventory().placeItemBackInInventory(be.upgrade.getItem());
+                        context.getPlayer().getInventory().placeItemBackInInventory(be.upgrade.getItem(), Prediction.SERVER_ONLY);
                     be.upgrade = EngineUpgrades.EMPTY;
                     be.sendData();
                     IWrenchable.playRotateSound(context.getLevel(), context.getClickedPos());

@@ -57,6 +57,7 @@ import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.AllFluidItemInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidItemInventory;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.util.Prediction;
 
 public class ModularDieselEngineBlock extends HorizontalKineticBlock implements IBE<ModularDieselEngineBlockEntity>, SpecialBlockItemRequirement, FluidInventoryProvider<ModularDieselEngineBlockEntity> {
 
@@ -189,7 +190,7 @@ public class ModularDieselEngineBlock extends HorizontalKineticBlock implements 
                 return;
 
             if (!context.getPlayer().isCreative())
-                context.getPlayer().getInventory().placeItemBackInInventory(controller.upgrade.getItem());
+                context.getPlayer().getInventory().placeItemBackInInventory(controller.upgrade.getItem(), Prediction.SERVER_ONLY);
 
             controller.upgrade = EngineUpgrades.EMPTY;
             controller.sendData();

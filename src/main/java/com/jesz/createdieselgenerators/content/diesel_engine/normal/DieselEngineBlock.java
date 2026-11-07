@@ -57,6 +57,7 @@ import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.AllFluidItemInventory;
 import com.zurrtum.create.infrastructure.fluids.FluidItemInventory;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.util.Prediction;
 
 public class DieselEngineBlock extends DirectionalKineticBlock implements SpecialBlockItemRequirement, IBE<DieselEngineBlockEntity>, ProperWaterloggedBlock, FluidInventoryProvider<DieselEngineBlockEntity> {
 
@@ -103,7 +104,7 @@ public class DieselEngineBlock extends DirectionalKineticBlock implements Specia
             if(be.upgrade != EngineUpgrades.EMPTY){
                 if(!context.getLevel().isClientSide()) {
                     if (!context.getPlayer().isCreative())
-                        context.getPlayer().getInventory().placeItemBackInInventory(be.upgrade.getItem());
+                        context.getPlayer().getInventory().placeItemBackInInventory(be.upgrade.getItem(), Prediction.SERVER_ONLY);
                     be.upgrade = EngineUpgrades.EMPTY;
                     be.sendData();
                     IWrenchable.playRotateSound(context.getLevel(), context.getClickedPos());
