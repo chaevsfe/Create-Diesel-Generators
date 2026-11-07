@@ -1,5 +1,8 @@
 package com.jesz.createdieselgenerators.content.oil_barrel;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.api.EnvironmentInterface;
 import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.content.distillation.DistillationTankBlockEntity;
@@ -34,6 +37,7 @@ import static com.jesz.createdieselgenerators.content.oil_barrel.OilBarrelBlock.
 import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.jesz.createdieselgenerators.CDGFluids;
 
+@EnvironmentInterface(value = EnvType.CLIENT, itf = IHaveGoggleInformation.class)
 public class OilBarrelBlockEntity extends SmartBlockEntity implements IMultiBlockEntityContainer.Fluid, IHaveGoggleInformation {
 
     protected FluidInventory fluidCapability;
@@ -220,6 +224,7 @@ public class OilBarrelBlockEntity extends SmartBlockEntity implements IMultiBloc
         return isController() ? worldPosition : controller;
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         OilBarrelBlockEntity controllerBE = getControllerBE();

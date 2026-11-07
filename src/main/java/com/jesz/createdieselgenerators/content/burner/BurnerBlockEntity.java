@@ -1,5 +1,8 @@
 package com.jesz.createdieselgenerators.content.burner;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.api.EnvironmentInterface;
 import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGRegistries;
 import com.jesz.createdieselgenerators.fuel_type.FuelType;
@@ -27,6 +30,7 @@ import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.client.api.goggles.IHaveGoggleInformation;
 import com.jesz.createdieselgenerators.CDGFluids;
 
+@EnvironmentInterface(value = EnvType.CLIENT, itf = IHaveGoggleInformation.class)
 public class BurnerBlockEntity extends KineticBlockEntity implements IHaveGoggleInformation {
     public float heat = -1;
     public int redstoneOutput = 0;
@@ -185,6 +189,7 @@ public class BurnerBlockEntity extends KineticBlockEntity implements IHaveGoggle
         super.read(tag, clientPacket);
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         return containedFluidTooltip(tooltip, isPlayerSneaking, tank);

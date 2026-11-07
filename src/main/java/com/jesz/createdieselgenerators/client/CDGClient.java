@@ -1,5 +1,12 @@
 package com.jesz.createdieselgenerators.client;
 
+import com.jesz.createdieselgenerators.CreateDieselGenerators;
+import com.jesz.createdieselgenerators.foundation.CDGAnimationTicks;
+import com.zurrtum.create.client.catnip.animation.AnimationTickHolder;
+import com.zurrtum.create.client.catnip.lang.FontHelper;
+import com.zurrtum.create.client.foundation.item.ItemDescription;
+import com.zurrtum.create.client.foundation.item.KineticStats;
+import com.zurrtum.create.client.foundation.item.TooltipModifier;
 import com.jesz.createdieselgenerators.CDGPartialModels;
 import com.jesz.createdieselgenerators.CDGSpriteShifts;
 import com.jesz.createdieselgenerators.client.model.CDGItemModels;
@@ -25,6 +32,10 @@ public final class CDGClient {
     }
 
     public static void initClient() {
+        CreateDieselGenerators.REGISTRATE.setTooltipModifierFactory(item ->
+                new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
+                        .andThen(TooltipModifier.mapNull(KineticStats.create(item))));
+        CDGAnimationTicks.bind(AnimationTickHolder::getTicks);
         CDGPartialModels.init();
         CDGSpriteShifts.init();
         CDGRegistrateClient.flush();

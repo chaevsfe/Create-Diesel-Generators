@@ -7,10 +7,6 @@ import com.jesz.createdieselgenerators.content.molds.MoldType;
 import com.jesz.createdieselgenerators.events.GameEvents;
 import com.jesz.createdieselgenerators.packets.CDGPackets;
 import com.jesz.createdieselgenerators.registrate.CDGRegistrate;
-import com.zurrtum.create.client.catnip.lang.FontHelper;
-import com.zurrtum.create.client.foundation.item.ItemDescription;
-import com.zurrtum.create.client.foundation.item.KineticStats;
-import com.zurrtum.create.client.foundation.item.TooltipModifier;
 import com.zurrtum.create.compat.Mods;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
@@ -23,11 +19,7 @@ public class CreateDieselGenerators {
     public static final String ID = "createdieselgenerators";
     public static final Logger LOGGER = LoggerFactory.getLogger(CreateDieselGenerators.class);
 
-    public static final CDGRegistrate REGISTRATE = CDGRegistrate.create(ID)
-            .setTooltipModifierFactory(item ->
-                    new ItemDescription.Modifier(item, FontHelper.Palette.STANDARD_CREATE)
-                            .andThen(TooltipModifier.mapNull(KineticStats.create(item)))
-            );
+    public static final CDGRegistrate REGISTRATE = CDGRegistrate.create(ID);
 
     public static void registerBlocksEarly() {
         CDGDisplaySources.register();

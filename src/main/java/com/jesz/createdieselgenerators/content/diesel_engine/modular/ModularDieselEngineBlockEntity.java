@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.content.diesel_engine.modular;
 
+import net.fabricmc.api.EnvironmentInterface;
 import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGBlocks;
 import com.jesz.createdieselgenerators.CDGConfig;
@@ -15,7 +16,6 @@ import com.zurrtum.create.foundation.blockEntity.SmartBlockEntity;
 import com.zurrtum.create.api.behaviour.BlockEntityBehaviour;
 import com.zurrtum.create.foundation.blockEntity.behaviour.scrollValue.ServerScrollOptionBehaviour;
 import com.jesz.createdieselgenerators.content.fluids.CDGFluidTank;
-import com.zurrtum.create.client.foundation.utility.CreateLang;
 import com.zurrtum.create.catnip.nbt.NBTHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -48,6 +48,7 @@ import com.jesz.createdieselgenerators.foundation.CDGInv;
 import com.zurrtum.create.client.api.goggles.IHaveGoggleInformation;
 import com.jesz.createdieselgenerators.CDGFluids;
 
+@EnvironmentInterface(value = EnvType.CLIENT, itf = IHaveGoggleInformation.class)
 public class ModularDieselEngineBlockEntity extends GeneratingKineticBlockEntity implements IHaveGoggleInformation, IEngine, IMultiBlockEntityContainer.Fluid {
     protected ServerScrollOptionBehaviour<WindmillBearingBlockEntity.RotationDirection> movementDirection;
     public int length = 1;
@@ -89,6 +90,7 @@ public class ModularDieselEngineBlockEntity extends GeneratingKineticBlockEntity
         super.addBehaviours(behaviours);
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         if (!isController()) {

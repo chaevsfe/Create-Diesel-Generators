@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.content.track_layers_bag;
 
+import net.minecraft.network.chat.Component;
 import com.jesz.createdieselgenerators.CDGDataComponents;
 import com.jesz.createdieselgenerators.CDGItems;
 import com.jesz.createdieselgenerators.CreateDieselGenerators;
@@ -10,7 +11,6 @@ import com.zurrtum.create.AllSoundEvents;
 import com.zurrtum.create.content.trains.track.ITrackBlock;
 import com.zurrtum.create.content.trains.track.TrackBlockItem;
 import com.zurrtum.create.content.trains.track.TrackPlacement;
-import com.zurrtum.create.client.foundation.utility.CreateLang;
 import com.zurrtum.create.catnip.data.Pair;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -206,7 +206,7 @@ public class TrackLayersBagItem extends Item {
         );
 
         if (info.message != null && !level.isClientSide())
-            CDGInv.actionBar(player, CreateLang.translateDirect(info.message), true);
+            CDGInv.actionBar(player, Component.translatable("create." + info.message), true);
 
         if (!info.valid) {
             AllSoundEvents.DENY.playFrom(player, 1, 1);
@@ -242,7 +242,7 @@ public class TrackLayersBagItem extends Item {
         if (level.isClientSide()) {
             level.playSound(player, player.blockPosition(), SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 0.75f, 1.0f);
         } else {
-            CDGInv.actionBar(player, CreateLang.translateDirect("track.selection_cleared"), true);
+            CDGInv.actionBar(player, Component.translatable("create.track.selection_cleared"), true);
             stack.remove(AllDataComponents.TRACK_CONNECTING_FROM);
         }
         return InteractionResult.SUCCESS;

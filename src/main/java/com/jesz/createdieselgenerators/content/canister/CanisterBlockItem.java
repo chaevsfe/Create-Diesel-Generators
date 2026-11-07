@@ -1,5 +1,7 @@
 package com.jesz.createdieselgenerators.content.canister;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.content.tools.FueledToolItem;
 import com.zurrtum.create.AllEnchantments;
@@ -29,6 +31,7 @@ public class CanisterBlockItem extends BlockItem implements FueledToolItem {
         super(block, properties.stacksTo(1));
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> adder, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, display, adder, tooltipFlag);
