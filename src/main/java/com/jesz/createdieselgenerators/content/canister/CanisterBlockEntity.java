@@ -11,6 +11,7 @@ import com.zurrtum.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankB
 import com.zurrtum.create.catnip.codecs.CatnipCodecUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.storage.ValueInput;
@@ -72,7 +73,7 @@ public class CanisterBlockEntity extends SmartBlockEntity implements IHaveGoggle
 
     public void setComponentPatch(DataComponentPatch componentPatch) {
         this.componentPatch = componentPatch;
-        SimpleFluidContent content = componentPatch.get(null, CDGDataComponents.FLUID_CONTENTS);
+        SimpleFluidContent content = componentPatch.get(DataComponentMap.EMPTY, CDGDataComponents.FLUID_CONTENTS);
         if (content == null || content.isEmpty())
             return;
 
