@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer.CrumblingOverlay;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +40,7 @@ public class CanisterRenderer extends SmartBlockEntityRenderer<CanisterBlockEnti
         if (state.enchanted == null)
             return;
         state.enchanted.submit(RenderTypes.cutoutMovingBlock(), matrices, queue);
-        state.enchanted.submit(RenderTypes.glint(), matrices, queue);
+        state.enchanted.submit(RenderTypes.itemCutoutGlint(TextureAtlas.LOCATION_BLOCKS), matrices, queue);
     }
 
     public static class CanisterRenderState extends SmartRenderState {
