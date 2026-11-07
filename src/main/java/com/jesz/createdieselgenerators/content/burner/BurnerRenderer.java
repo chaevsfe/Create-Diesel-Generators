@@ -53,12 +53,12 @@ public class BurnerRenderer extends ShaftRenderer {
 
     @Override
     public void submit(SingleKineticRenderState renderState, PoseStack matrices, SubmitNodeCollector queue, CameraRenderState cameraState) {
-        super.submit(renderState, matrices, queue, cameraState);
         BurnerRenderState state = (BurnerRenderState) renderState;
         if (state.leftDial != null)
             state.leftDial.submit(matrices, queue);
         if (state.rightDial != null)
             state.rightDial.submit(matrices, queue);
+        super.submit(renderState, matrices, queue, cameraState);
     }
 
     public static class BurnerRenderState extends SingleKineticRenderState {
