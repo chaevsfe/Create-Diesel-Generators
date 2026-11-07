@@ -132,7 +132,7 @@ public class FluidBuilder<T extends FlowableFluid, P> extends AbstractBuilder<T,
                     .replaceable()
                     .noCollision()
                     .strength(100.0F)
-                    .pushReaction(PushReaction.DESTROY)
+                    .pushReaction(PushReaction.POPPED)
                     .noLootTable()
                     .liquid()
                     .sound(SoundType.EMPTY)

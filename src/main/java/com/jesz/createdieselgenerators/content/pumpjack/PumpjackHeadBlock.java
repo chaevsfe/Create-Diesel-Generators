@@ -1,6 +1,5 @@
 package com.jesz.createdieselgenerators.content.pumpjack;
 
-import com.mojang.serialization.MapCodec;
 import com.zurrtum.create.content.contraptions.actors.AttachedActorBlock;
 import com.zurrtum.create.content.contraptions.actors.harvester.HarvesterBlock;
 import net.minecraft.core.BlockPos;
@@ -9,7 +8,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -18,13 +16,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class PumpjackHeadBlock extends AttachedActorBlock {
     public PumpjackHeadBlock(Properties properties) {
         super(properties);
-    }
-
-    public static final MapCodec<PumpjackHeadBlock> CODEC = simpleCodec(PumpjackHeadBlock::new);
-
-    @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-        return CODEC;
     }
 
     @Override
