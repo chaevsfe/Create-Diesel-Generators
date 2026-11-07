@@ -12,7 +12,6 @@ import com.jesz.createdieselgenerators.mixins.LootTableAccessor;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
@@ -41,7 +40,6 @@ public class GameEvents {
             registry.listElements().forEach(holder -> indexLootTable(holder.key().identifier(), holder.value()));
         });
         ServerTickEvents.END_LEVEL_TICK.register(GameEvents::onServerTick);
-        FuelValueEvents.BUILD.register((builder, context) -> builder.add(CDGItems.WOOD_CHIPS.get(), CDGItems.WOOD_CHIPS.get().getBurnTime()));
     }
 
     private static void indexLootTable(Identifier tableId, LootTable table) {

@@ -13,17 +13,22 @@ import com.jesz.createdieselgenerators.content.track_layers_bag.TrackLayersBagIt
 import com.zurrtum.create.AllBlockTags;
 import com.zurrtum.create.AllItemTags;
 import com.jesz.createdieselgenerators.registrate.entry.ItemEntry;
-import net.minecraft.world.item.AxeItem;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProvider;
 
 import static com.jesz.createdieselgenerators.CreateDieselGenerators.REGISTRATE;
 
 public class CDGItems {
 
+    private static final ResourceKey<ContextIntProvider> WOOD_CHIP_FUEL = ResourceKey.create(Registries.CONTEXT_INT_PROVIDER, Identifier.withDefaultNamespace("cooking/time_wood_items_large"));
+
     public static final ItemEntry<Item> KELP_HANDLE = REGISTRATE.item("kelp_handle", Item::new).register();
 
-    public static final ItemEntry<FurnaceBurnItem> WOOD_CHIPS = REGISTRATE.item("wood_chip", p -> new FurnaceBurnItem(p, 200))
+    public static final ItemEntry<FurnaceBurnItem> WOOD_CHIPS = REGISTRATE.item("wood_chip", p -> new FurnaceBurnItem(p.cookingFuel(WOOD_CHIP_FUEL), 200))
             .tag(CDGTags.WOOD_DUST)
             .register();
 
