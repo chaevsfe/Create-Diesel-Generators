@@ -31,8 +31,8 @@ jobs:
 
       - name: Fetch the Strut Your Stuff jar this mod compiles against
         env:
-          STRUTS_JAR_NAME: StrutYourStuff-1.3.1-fly.26.2-beta.5+fabric-mc26.2.jar
-          STRUTS_JAR_URL: https://github.com/chaevsfe/StrutYourStuff/releases/download/1.3.1-fly.26.2-beta.5/StrutYourStuff-1.3.1-fly.26.2-beta.5%2Bfabric-mc26.2.jar
+          STRUTS_JAR_NAME: StrutYourStuff-1.3.1+fly-mc26.2.jar
+          STRUTS_JAR_URL: https://github.com/chaevsfe/StrutYourStuff/releases/download/1.3.1%2Bfly-mc26.2/StrutYourStuff-1.3.1%2Bfly-mc26.2.jar
         run: |
           mkdir -p libs
           curl -fsSL -o "libs/$STRUTS_JAR_NAME" "$STRUTS_JAR_URL"
