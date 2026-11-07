@@ -1,5 +1,8 @@
 package com.jesz.createdieselgenerators.content.turret;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.api.EnvironmentInterface;
 import com.jesz.createdieselgenerators.CDGBlockEntityTypes;
 import com.jesz.createdieselgenerators.CDGRegistries;
 import com.jesz.createdieselgenerators.content.tools.ChemicalSprayerProjectileEntity;
@@ -31,6 +34,7 @@ import com.jesz.createdieselgenerators.CDGFluids;
 import net.minecraft.world.level.block.Block;
 import com.jesz.createdieselgenerators.CDGItems;
 
+@EnvironmentInterface(value = EnvType.CLIENT, itf = IHaveGoggleInformation.class)
 public class ChemicalTurretBlockEntity extends TurretBlockEntity implements IHaveGoggleInformation {
 
     public boolean lighterUpgrade = false;
@@ -55,6 +59,7 @@ public class ChemicalTurretBlockEntity extends TurretBlockEntity implements IHav
 
     public SmartFluidTankBehaviour tank;
 
+    @Environment(EnvType.CLIENT)
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         return containedFluidTooltip(tooltip, isPlayerSneaking, tank.getCapability());

@@ -1,5 +1,6 @@
 package com.jesz.createdieselgenerators.content.entity_filter;
 
+import net.minecraft.network.chat.Component;
 import com.zurrtum.create.AllBlocks;
 import com.zurrtum.create.AllItems;
 import com.zurrtum.create.AllSoundEvents;
@@ -7,7 +8,6 @@ import com.zurrtum.create.content.logistics.filter.FilterItem;
 import com.zurrtum.create.foundation.blockEntity.SmartBlockEntity;
 import com.zurrtum.create.foundation.blockEntity.behaviour.filtering.ServerFilteringBehaviour;
 import com.zurrtum.create.foundation.item.ItemHelper;
-import com.zurrtum.create.client.foundation.utility.CreateLang;
 import com.zurrtum.create.catnip.math.VecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -50,7 +50,7 @@ public class EntityFilteringBehaviour extends ServerFilteringBehaviour {
             toApply.setCount(1);
 
         if (!super.setFilter(side, toApply)) {
-            CDGInv.actionBar(player, CreateLang.translateDirect("logistics.filter.invalid_item"), true);
+            CDGInv.actionBar(player, Component.translatable("create.logistics.filter.invalid_item"), true);
             AllSoundEvents.DENY.playOnServer(player.level(), player.blockPosition(), 1, 1);
             return;
         }

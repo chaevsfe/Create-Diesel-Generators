@@ -5,8 +5,6 @@ import com.cake.struts.content.StrutRenderLayer;
 import com.cake.struts.content.block.StrutBlockItem;
 import com.jesz.createdieselgenerators.CreateDieselGenerators;
 import com.jesz.createdieselgenerators.registrate.entry.BlockEntry;
-import com.zurrtum.create.client.foundation.item.ItemDescription;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
@@ -21,10 +19,6 @@ public class StrutYourStuffRegistryEntries {
                     props -> new TrussGirderStrutBlock(props, ANDESITE_GIRDER_MODEL))
             .properties(p -> p.strength(3f, 6f))
             .properties(BlockBehaviour.Properties::noOcclusion)
-            .onRegisterAfter(
-                    Registries.ITEM,
-                    v -> ItemDescription.useKey(v, "block.bits_n_bobs.girder_strut")
-            )
             .item(StrutBlockItem::new)
             .build()
             .register();

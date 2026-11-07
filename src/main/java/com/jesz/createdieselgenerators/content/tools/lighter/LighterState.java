@@ -1,9 +1,9 @@
 package com.jesz.createdieselgenerators.content.tools.lighter;
 
+import java.util.Locale;
 import com.mojang.serialization.Codec;
 import io.netty.buffer.ByteBuf;
 import com.zurrtum.create.catnip.codecs.stream.CatnipStreamCodecBuilders;
-import com.zurrtum.create.client.catnip.lang.Lang;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import org.jspecify.annotations.NonNull;
@@ -20,6 +20,6 @@ public enum LighterState implements StringRepresentable {
 
     @Override
     public @NonNull String getSerializedName() {
-        return Lang.asId(name());
+        return name().toLowerCase(Locale.ROOT);
     }
 }

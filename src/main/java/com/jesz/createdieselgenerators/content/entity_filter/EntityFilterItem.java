@@ -1,5 +1,7 @@
 package com.jesz.createdieselgenerators.content.entity_filter;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import com.jesz.createdieselgenerators.CDGDataComponents;
 import com.jesz.createdieselgenerators.CDGMenuTypes;
 import com.zurrtum.create.AllDataComponents;
@@ -52,6 +54,7 @@ public class EntityFilterItem extends Item implements MenuProvider {
         return stack.getOrDefault(CDGDataComponents.ENTITY_FILTER_MATCHED_ATTRIBUTES, Collections.emptyList());
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> adder, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, display, adder, tooltipFlag);
@@ -65,6 +68,7 @@ public class EntityFilterItem extends Item implements MenuProvider {
         tooltipComponents.forEach(adder);
     }
 
+    @Environment(EnvType.CLIENT)
     private List<Component> makeSummary(ItemStack stack) {
         List<Component> list = new ArrayList<>();
 

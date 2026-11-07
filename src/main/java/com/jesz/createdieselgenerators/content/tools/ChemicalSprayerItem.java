@@ -36,6 +36,7 @@ public class ChemicalSprayerItem extends Item implements FueledToolItem {
         this.lighter = lighter;
     }
 
+    @Environment(EnvType.CLIENT)
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> adder, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, display, adder, tooltipFlag);

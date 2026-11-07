@@ -1,5 +1,7 @@
 package com.jesz.createdieselgenerators.content.tools;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import com.jesz.createdieselgenerators.CDGConfig;
 import com.jesz.createdieselgenerators.CDGDataComponents;
 import com.zurrtum.create.AllEnchantments;
@@ -50,6 +52,7 @@ public interface FueledToolItem {
         return readFluid(stack).getAmount();
     }
 
+    @Environment(EnvType.CLIENT)
     default void createTooltip(List<Component> tooltip, ItemStack stack){
         if(stack.has(CDGDataComponents.FLUID_CONTENTS)) {
             FluidStack fluid = readFluid(stack);
