@@ -47,8 +47,10 @@ public class MultiBlockContainerBlockItem extends BlockItem {
     }
 
     @Override
-    protected boolean updateCustomBlockEntityTag(BlockPos pos, Level level, Player player,
-                                                 ItemStack stack, BlockState state) {
+    protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
+        if (!super.placeBlock(context, state))
+            return false;
+        ItemStack stack = context.getItemInHand();
         TypedEntityData<BlockEntityType<?>> blockEntityData = stack.get(DataComponents.BLOCK_ENTITY_DATA);
 
         if (blockEntityData != null) {
@@ -59,7 +61,7 @@ public class MultiBlockContainerBlockItem extends BlockItem {
             nbt.remove("LastKnownPos");
             stack.set(DataComponents.BLOCK_ENTITY_DATA, TypedEntityData.of(blockEntityData.type(), nbt));
         }
-        return super.updateCustomBlockEntityTag(pos, level, player, stack, state);
+        return true;
     }
 
     private <T extends BlockEntity & IMultiBlockEntityContainer> void tryMultiPlace(BlockPlaceContext ctx) {
