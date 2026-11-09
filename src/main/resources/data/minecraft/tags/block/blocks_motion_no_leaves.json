@@ -1,43 +1,160 @@
 {
   "values": [
-    "createdieselgenerators:andesite_girder",
-    "createdieselgenerators:andesite_girder_encased_shaft",
-    "createdieselgenerators:asphalt_block",
-    "createdieselgenerators:asphalt_slab",
-    "createdieselgenerators:asphalt_stairs",
-    "createdieselgenerators:basin_lid",
-    "createdieselgenerators:black_concrete_encased_fluid_pipe",
-    "createdieselgenerators:blue_concrete_encased_fluid_pipe",
-    "createdieselgenerators:brown_concrete_encased_fluid_pipe",
-    "createdieselgenerators:bulk_fermenter",
-    "createdieselgenerators:burner",
-    "createdieselgenerators:canister",
-    "createdieselgenerators:chemical_turret",
-    "createdieselgenerators:chip_wood_beam",
-    "createdieselgenerators:chip_wood_slab",
-    "createdieselgenerators:chip_wood_stairs",
-    "createdieselgenerators:cyan_concrete_encased_fluid_pipe",
-    "createdieselgenerators:diesel_engine",
-    "createdieselgenerators:distillation_tank",
-    "createdieselgenerators:gray_concrete_encased_fluid_pipe",
-    "createdieselgenerators:green_concrete_encased_fluid_pipe",
-    "createdieselgenerators:huge_diesel_engine",
-    "createdieselgenerators:large_diesel_engine",
-    "createdieselgenerators:light_blue_concrete_encased_fluid_pipe",
-    "createdieselgenerators:light_gray_concrete_encased_fluid_pipe",
-    "createdieselgenerators:lime_concrete_encased_fluid_pipe",
-    "createdieselgenerators:magenta_concrete_encased_fluid_pipe",
-    "createdieselgenerators:oil_barrel",
-    "createdieselgenerators:orange_concrete_encased_fluid_pipe",
-    "createdieselgenerators:pink_concrete_encased_fluid_pipe",
-    "createdieselgenerators:pumpjack_bearing",
-    "createdieselgenerators:pumpjack_bearing_b",
-    "createdieselgenerators:pumpjack_crank",
-    "createdieselgenerators:pumpjack_hole",
-    "createdieselgenerators:purple_concrete_encased_fluid_pipe",
-    "createdieselgenerators:red_concrete_encased_fluid_pipe",
-    "createdieselgenerators:sheet_metal_panel",
-    "createdieselgenerators:white_concrete_encased_fluid_pipe",
-    "createdieselgenerators:yellow_concrete_encased_fluid_pipe"
+    {
+      "id": "createdieselgenerators:andesite_girder",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:andesite_girder_encased_shaft",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:asphalt_block",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:asphalt_slab",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:asphalt_stairs",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:basin_lid",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:black_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:blue_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:brown_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:bulk_fermenter",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:burner",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:canister",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:chemical_turret",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:chip_wood_beam",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:chip_wood_slab",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:chip_wood_stairs",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:cyan_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:diesel_engine",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:distillation_tank",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:gray_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:green_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:huge_diesel_engine",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:large_diesel_engine",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:light_blue_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:light_gray_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:lime_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:magenta_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:oil_barrel",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:orange_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:pink_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:pumpjack_bearing",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:pumpjack_bearing_b",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:pumpjack_crank",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:pumpjack_hole",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:purple_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:red_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:sheet_metal_panel",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:white_concrete_encased_fluid_pipe",
+      "required": false
+    },
+    {
+      "id": "createdieselgenerators:yellow_concrete_encased_fluid_pipe",
+      "required": false
+    }
   ]
 }
