@@ -81,15 +81,21 @@ tasks.withType<AbstractCopyTask>().configureEach {
 
 val generatedConnectedTextureResources = layout.buildDirectory.dir("generated/connected-texture-resources")
 
-val crossTileIndexes = (1..15).toList()
-val rectangleTileIndexes = (0..11).toList() + (13..15).toList()
+val crossTileIndexes = listOf(null) + (1..15).toList()
+val rectangleTileIndexes = listOf(null) + (0..11).toList() + (13..15).toList()
+val rectangleWithOriginalTileIndexes = listOf(12) + (0..11).toList() + (13..15).toList()
+val dyedOilBarrelColors = listOf("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
+    "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black")
 
 val connectedTextureSheets = mapOf(
     "assets/createdieselgenerators/textures/block/diesel_engine_big_connected.png" to (4 to crossTileIndexes),
     "assets/createdieselgenerators/textures/block/bulk_fermenter/*_connected.png" to (4 to rectangleTileIndexes),
     "assets/createdieselgenerators/textures/block/distillation_tower/*_connected.png" to (4 to rectangleTileIndexes),
-    "assets/createdieselgenerators/textures/block/oil_barrel/**/*_connected.png" to (4 to rectangleTileIndexes),
-)
+    "assets/createdieselgenerators/textures/block/oil_barrel/top_connected.png" to (4 to rectangleTileIndexes),
+    "assets/createdieselgenerators/textures/block/oil_barrel/*/iron_connected.png" to (4 to rectangleTileIndexes),
+) + dyedOilBarrelColors.associate {
+    "assets/createdieselgenerators/textures/block/oil_barrel/*/${it}_connected.png" to (4 to rectangleWithOriginalTileIndexes)
+}
 val connectedTextureSheetsAlsoUsedByModels = listOf(
     "assets/createdieselgenerators/textures/block/bulk_fermenter/*_connected.png",
     "assets/createdieselgenerators/textures/block/distillation_tower/*_connected.png",
@@ -118,9 +124,10 @@ val generateConnectedTextureSprites = tasks.register("generateConnectedTextureSp
                 val relativeSheet = resourceRoot.toPath().relativize(sheetFile.toPath()).toString()
                 val spriteDirectory = outputRoot.resolve(relativeSheet.removeSuffix(".png"))
                 spriteDirectory.mkdirs()
-                tileIndexes.forEachIndexed { index, sourceTileIndex ->
+                tileIndexes.forEachIndexed { spriteIndex, sourceTileIndex ->
+                    if (sourceTileIndex == null) return@forEachIndexed
                     val tile = sheet.getSubimage(sourceTileIndex % gridSize * tileSize, sourceTileIndex / gridSize * tileSize, tileSize, tileSize)
-                    if (!ImageIO.write(tile, "png", spriteDirectory.resolve("${index + 1}.png"))) {
+                    if (!ImageIO.write(tile, "png", spriteDirectory.resolve("$spriteIndex.png"))) {
                         throw GradleException("No PNG writer is available for $spriteDirectory")
                     }
                     spriteCount++
