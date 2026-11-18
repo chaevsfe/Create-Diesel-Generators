@@ -9,6 +9,8 @@ import com.zurrtum.create.content.kinetics.steamEngine.SteamEngineBlock;
 import com.zurrtum.create.catnip.data.Iterate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,6 +27,12 @@ public class PoweredEngineShaftBlock extends PoweredShaftBlock {
                     .setValue(PoweredShaftBlock.AXIS, stateForPlacement.getValue(ShaftBlock.AXIS))
                     .setValue(WATERLOGGED, stateForPlacement.getValue(WATERLOGGED));
         return stateForPlacement;
+    }
+
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!stillValid(state, level, pos))
+            super.tick(state, level, pos, random);
     }
 
     @Override
