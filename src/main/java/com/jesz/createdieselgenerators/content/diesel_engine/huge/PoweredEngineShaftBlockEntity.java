@@ -104,6 +104,11 @@ public class PoweredEngineShaftBlockEntity extends GeneratingKineticBlockEntity 
             movementDirection = 0;
             speed = 0;
             stressCapacity = 0;
+        } else if (removed) {
+            float maxSpeed = 0;
+            for (Pair<BlockPos, Couple<Float>> engine : engines)
+                maxSpeed = Math.max(maxSpeed, engine.getSecond().getSecond());
+            speed = maxSpeed;
         }
         if (removed)
             reActivateSource = true;
