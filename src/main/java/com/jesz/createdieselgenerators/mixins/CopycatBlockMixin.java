@@ -32,8 +32,6 @@ public class CopycatBlockMixin {
                 if(CDGBlocks.OIL_BARREL.has(be.getMaterial()))
                     be.setMaterial(be.getMaterial().setValue(OilBarrelBlock.OIL_BARREL_COLOR, OilBarrelBlock.OilBarrelColor.getForDyeColor(dyeColor)));
             }
-            if (!player.isCreative())
-                stack.shrink(1);
             cir.setReturnValue(InteractionResult.SUCCESS);
         }
     }
